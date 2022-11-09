@@ -4,6 +4,7 @@ import './App.scss';
 
 import HomePage from './pages/HomePage';
 import About from './pages/About';
+import Basket from './pages/Basket';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/about">
             <About />
+          </Route>
+          <Route exact path="/basket">
+            <Basket/>
           </Route>
         <Footer />
       </Router>

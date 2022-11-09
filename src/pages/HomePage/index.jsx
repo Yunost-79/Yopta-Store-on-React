@@ -1,20 +1,14 @@
 import React from 'react';
 import './style.scss';
 
+import PreviewMain from '../../components/PreviewMain'
+
+
+
 const HomePage = () => {
   return (
     <div className="main">
-      HomePage
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
-      <h1>123</h1>
+      <PreviewMain/>
     </div>
   );
 };
