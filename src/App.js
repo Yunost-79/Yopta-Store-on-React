@@ -9,7 +9,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import { HEADER_LINKS_ITEMS } from './variables/variablesScripts';
-import './variablesStyle.scss';
+import './variables/variablesStyle.scss';
 
 const data = HEADER_LINKS_ITEMS;
 
