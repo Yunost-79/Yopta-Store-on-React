@@ -5,17 +5,17 @@ export const HEADER_LINKS_ITEMS = [
     // exact: true,
   },
   {
-    to: '/',
+    to: '/about',
     label: 'About',
     // exact: false,
   },
   {
-    to: '/',
+    to: '/basket',
     label: 'Basket',
     // exact: false,
   },
   {
-    to: '/',
+    to: '/login',
     label: 'Log in',
     // exact: false,
   },

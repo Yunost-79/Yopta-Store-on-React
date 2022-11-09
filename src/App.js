@@ -1,21 +1,31 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.scss';
-import HomePage from './components/HomePage/HomePage';
-// import About from './components/About/About';
-import Layout from './components/Layout/Layout';
 
+import HomePage from './pages/HomePage';
+import About from './pages/About';
+
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+import { HEADER_LINKS_ITEMS } from './variables/variablesScripts';
+import './variablesStyle.scss';
+
+const data = HEADER_LINKS_ITEMS;
 
 function App() {
   return (
     <div className="wrapper">
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />}></Route>
-          {/* <Route path='about' element={<About />}></Route> */}
-        </Route>
-      </Routes>
+      <Router>
+        <Header />
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+        <Footer />
+      </Router>
     </div>
   );
 }
