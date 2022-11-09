@@ -34,7 +34,10 @@ const Layout = () => {
 
       <Outlet />
 
-      <footer className="footer">This is footer</footer>
+      <footer className="footer">
+          <p>Created with the support of "Boring" Co.</p>
+          <p>© 2022</p>
+      </footer>
     </>
   );
 };
