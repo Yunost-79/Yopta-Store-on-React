@@ -1,10 +1,9 @@
-
 $yellow: #faa60f;
-
 
 // ================ Header ================
 
 .header {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,22 +12,54 @@ $yellow: #faa60f;
   padding: 0 75px;
   background-color: #38287b;
 
-  & .header_logo{
+  & .header_logo {
     display: flex;
     align-items: center;
-    img{
-      width: 45px;
-    }
-    h1{
-      margin-left: 25px;
-      color: $yellow;
+    & .logo_link {
+      display: flex;
+      text-decoration: none;
+      opacity: 1;
+      transition: 0.2s all;
 
+      &:hover {
+        opacity: 0.7;
+      }
+      img {
+        width: 45px;
+      }
+      h1 {
+        text-transform: uppercase;
+        font-size: 30px;
+        margin-left: 25px;
+        color: $yellow;
+      }
+    }
+  }
+
+  & .header_links {
+    & ul {
+      display: flex;
+
+      & li {
+        margin-left: 30px;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+
+        & .link {
+          text-decoration: none;
+          color: #fff;
+          transition: 0.2s all;
+
+          &:hover {
+            color: $yellow;
+          }
+        }
+      }
     }
   }
 }
-
-
-
 
 // ================ Footer ================
 
