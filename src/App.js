@@ -17,17 +17,19 @@ import './variables/variablesStyle.scss';
 
 function App() {
   const [productData, setProductData] = useState([]);
+  const [isProductLoading, setIsProductLoading] = useState(false);
 
   useEffect(() => {
-    handleGetData() 
+    handleGetData();
   }, []);
 
-
-  const handleGetData = async () =>{
+  const handleGetData = async () => {
+    setIsProductLoading(true);
     const data = await fetchData();
     const products = data.data;
     setProductData(products);
-  }
+    setIsProductLoading(false);
+  };
 
   return (
     <div className="wrapper">
@@ -36,7 +38,7 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <HomePage productData={productData} />
+            <HomePage productData={productData} isProductLoading={isProductLoading} />
           </Route>
           <Route exact path="/about">
             <About />
