@@ -1,14 +1,14 @@
 import React from 'react';
 import './style.scss';
 
-import PreviewMain from '../../components/PreviewMain'
+import PreviewMain from '../../components/PreviewMain';
+import ProductMain from '../../components/ProductMain';
 
-
-
-const HomePage = () => {
+const HomePage = ({ productData }) => {
   return (
     <div className="main">
-      <PreviewMain/>
+      <PreviewMain />
+      <ProductMain productData={productData} />
     </div>
   );
 };
