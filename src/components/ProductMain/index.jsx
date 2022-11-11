@@ -1,9 +1,9 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 
 import './style.scss';
-import CommonButton from '../Items/CommonButton';
-import Loader from '../Items/Loader';
+import Loader from '../UI/Loader';
+import CatalogList from '../CatalogList';
+import FiltersBlock from '../FiltersBlock';
 
 const ProductMain = ({ productData, isProductLoading }) => {
   console.log(productData);
@@ -16,18 +16,11 @@ const ProductMain = ({ productData, isProductLoading }) => {
       {isProductLoading ? (
         <Loader />
       ) : (
-        <div className="catalog_list">
-          {productData.map((elem) => (
-            <div key={nanoid()} className="product_block">
-              <img className="product_image" src={elem.category.image} />
-              <div className="product_subcontent">
-                <h3 className="product_title">{elem.title}</h3>
-                <span className="product_price">{elem.price} &#x20AC;</span>
-                <span className="product_category">{elem.category.name}</span>
-                <CommonButton>Open Details</CommonButton>
-              </div>
-            </div>
-          ))}
+        <div className="catalog_block">
+          <FiltersBlock productData={productData}/>
+          <div className="catalog_list">
+            <CatalogList productData={productData} />
+          </div>
         </div>
       )}
     </div>

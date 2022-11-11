@@ -10,10 +10,8 @@ import Basket from './pages/Basket';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-// import { HEADER_LINKS_ITEMS } from './variables/variablesScripts';
 import './variables/variablesStyle.scss';
 
-// const data = HEADER_LINKS_ITEMS;
 
 function App() {
   const [productData, setProductData] = useState([]);
@@ -29,6 +27,7 @@ function App() {
     const products = data.data;
     setProductData(products);
     setIsProductLoading(false);
+    console.log(products);
   };
 
   return (
