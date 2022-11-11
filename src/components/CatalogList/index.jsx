@@ -1,14 +1,14 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 import CommonButton from '../UI/CommonButton';
 
 import './style.scss';
 
 const CatalogList = ({ productData }) => {
+  console.log("productData", productData)
   return (
     <>
       {productData.map((elem) => (
-        <div key={nanoid()} className="product_block">
+        <div key={elem.id} className="product_block">
           <img className="product_image" src={elem.image} />
           <div className="product_subcontent">
             <h3 className="product_title">{elem.title}</h3>
@@ -17,7 +17,7 @@ const CatalogList = ({ productData }) => {
             <CommonButton>Open Details</CommonButton>
           </div>
         </div>
-      ))}{' '}
+      ))}
     </>
   );
 };

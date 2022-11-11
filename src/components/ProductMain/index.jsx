@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './style.scss';
 import Loader from '../UI/Loader';
@@ -6,7 +6,34 @@ import CatalogList from '../CatalogList';
 import FiltersBlock from '../FiltersBlock';
 
 const ProductMain = ({ productData, isProductLoading }) => {
-  console.log(productData);
+  // console.log(productData);
+  const [sort, setSort] = useState(null);
+  const [filter, setFilter] = useState(null);
+
+  const handleSort = list => {
+    if (sort) {
+      return list?.sort((a, b) => {
+        const aData = a[sort.key];
+        const bData = b[sort.key];
+        const val = sort.compareFunc(aData, bData);
+        if (val === true) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    } else {
+      return list;
+    }
+  };
+
+  const handleFilter = list => {
+    if (filter) {
+      
+    } else {
+      return list;
+    }
+  };
 
   return (
     <div className="product_catalog_container">
@@ -17,9 +44,9 @@ const ProductMain = ({ productData, isProductLoading }) => {
         <Loader />
       ) : (
         <div className="catalog_block">
-          <FiltersBlock productData={productData}/>
+          <FiltersBlock setSort={setSort} />
           <div className="catalog_list">
-            <CatalogList productData={productData} />
+            <CatalogList productData={handleFilter(handleSort(productData))} />
           </div>
         </div>
       )}
