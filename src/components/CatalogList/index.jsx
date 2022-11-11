@@ -4,7 +4,6 @@ import CommonButton from '../UI/CommonButton';
 import './style.scss';
 
 const CatalogList = ({ productData }) => {
-  console.log("productData", productData)
   return (
     <>
       {productData.map((elem) => (

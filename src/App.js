@@ -27,7 +27,6 @@ function App() {
     const products = data.data;
     setProductData(products);
     setIsProductLoading(false);
-    // console.log(products);
   };
 
   return (

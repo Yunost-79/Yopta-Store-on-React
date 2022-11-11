@@ -6,11 +6,10 @@ import CatalogList from '../CatalogList';
 import FiltersBlock from '../FiltersBlock';
 
 const ProductMain = ({ productData, isProductLoading }) => {
-  // console.log(productData);
   const [sort, setSort] = useState(null);
   const [filter, setFilter] = useState(null);
 
-  const handleSort = list => {
+  const handleSort = (list) => {
     if (sort) {
       return list?.sort((a, b) => {
         const aData = a[sort.key];
@@ -27,9 +26,13 @@ const ProductMain = ({ productData, isProductLoading }) => {
     }
   };
 
-  const handleFilter = list => {
+  const handleFilter = (list) => {
     if (filter) {
-      
+      return list?.filter((elem) => {
+        const data = elem[filter.key];
+        const value = filter.compareFunc(data);
+        return value;
+      });
     } else {
       return list;
     }
@@ -44,7 +47,7 @@ const ProductMain = ({ productData, isProductLoading }) => {
         <Loader />
       ) : (
         <div className="catalog_block">
-          <FiltersBlock setSort={setSort} />
+          <FiltersBlock setSort={setSort} setFilter={setFilter} />
           <div className="catalog_list">
             <CatalogList productData={handleFilter(handleSort(productData))} />
           </div>
