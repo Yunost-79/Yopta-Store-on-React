@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import './style.scss';
 import Loader from '../UI/Loader';
@@ -8,7 +8,9 @@ import FiltersBlock from '../FiltersBlock';
 const ProductMain = ({ productData, isProductLoading }) => {
   const [sort, setSort] = useState(null);
   const [filter, setFilter] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
 
+  //Sorting by low/high price and name
   const handleSort = (list) => {
     if (sort) {
       return list?.sort((a, b) => {
@@ -26,17 +28,31 @@ const ProductMain = ({ productData, isProductLoading }) => {
     }
   };
 
-  const handleFilter = (list) => {
-    if (filter) {
-      return list?.filter((elem) => {
-        const data = elem[filter.key];
-        const value = filter.compareFunc(data);
-        return value;
-      });
-    } else {
-      return list;
-    }
+  const sortProduct = handleSort(productData);
+
+  //Filter by price
+  
+  // const handleFilter = (list) => {
+  //   if (filter) {
+  //     return list?.filter((elem) => {
+  //       const data = elem[filter.key];
+  //       const value = filter.compareFunc(data);
+  //       return value;
+  //     });
+  //   } else {
+  //     return list;
+  //   }
+  // };
+
+  //Search
+
+  const handleSearch = () => {
+    return productData.filter((item) => {
+      return item.title.toLowerCase().indexOf(searchValue.toLowerCase()) != -1;
+    });
   };
+
+
 
   return (
     <div className="product_catalog_container">
@@ -47,9 +63,9 @@ const ProductMain = ({ productData, isProductLoading }) => {
         <Loader />
       ) : (
         <div className="catalog_block">
-          <FiltersBlock setSort={setSort} setFilter={setFilter} />
+          <FiltersBlock setSort={setSort} setFilter={setFilter} setSearchValue={setSearchValue} />
           <div className="catalog_list">
-            <CatalogList productData={handleFilter(handleSort(productData))} />
+            <CatalogList productData={handleSearch(sortProduct)} />
           </div>
         </div>
       )}

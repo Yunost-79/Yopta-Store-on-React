@@ -5,13 +5,14 @@
   margin-top: 15px;
   background-color: $yellow;
   padding: 10px 20px;
-  color: #fff;
+  color: #000;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s linear;
 
   &:hover, &:active{
     background-color: $violet;
+    color: #fff;
 
   }
 

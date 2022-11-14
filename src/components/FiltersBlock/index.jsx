@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import SortSelect from '../UI/SortSelect';
+import CommonButton from '../UI/CommonButton';
 import './style.scss';
 
-const FiltersBlock = ({ setSort, setFilter }) => {
+const FiltersBlock = ({ setSort, setFilter, setSearchValue }) => {
   const [selectedSort, setSelectedSort] = useState('');
   const [maxPrice, setMaxPrice] = useState(9999);
   const [minPrice, setMinPrice] = useState(0);
@@ -36,6 +36,7 @@ const FiltersBlock = ({ setSort, setFilter }) => {
 
   useEffect(() => {
     const activeSort = sortOptions.find((it) => Number(it.id) === Number(selectedSort));
+
     if (activeSort) {
       setSort(activeSort);
     }
@@ -48,23 +49,27 @@ const FiltersBlock = ({ setSort, setFilter }) => {
     });
   };
 
+  
+
   return (
     <div className="catalog_sort">
-      <span className="sort_title">Sorting</span>
-      <select value={selectedSort} onChange={(e) => setSelectedSort(e.target.value)}>
-        <option disabled value="">
+      <span className="sort_filter_title">Sorting</span>
+
+      <input type="text" name="search" placeholder="Search..." onChange={(e) => setSearchValue(e.target.value)} />
+
+      <select className="sort_select" value={selectedSort} onChange={(e) => setSelectedSort(e.target.value)}>
+        <option className="sort_selected_option_disabled" disabled value="">
           Select
         </option>
         {sortOptions.map((option) => (
-          <option value={option.id} key={option.label}>
+          <option className="sort_selected_option_active" value={option.id} key={option.label}>
             {option.label}
           </option>
         ))}
       </select>
-      <input onChange={e=>setMaxPrice(e.target.value)} value={maxPrice} />
-      <input onChange={e=>setMinPrice(e.target.value)} value={minPrice} />
-      <button onClick={handlePriceClick}>Kick me</button>
-
+      <input className="filter_input" type="text" onChange={(e) => setMaxPrice(e.target.value)} value={maxPrice} placeholder="Max price" />
+      <input className="filter_input" type="text" onChange={(e) => setMinPrice(e.target.value)} value={minPrice} placeholder="Min price" />
+      <CommonButton onClick={handlePriceClick}>Filter by price</CommonButton>
     </div>
   );
 };
