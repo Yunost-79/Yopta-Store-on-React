@@ -50,6 +50,25 @@ const ProductMain = ({ productData, isProductLoading }) => {
     });
   };
 
+  const getPriceRange = list => {
+    let max = list[0]?.price || 9999;
+    let min = list[0]?.price || 0;
+
+    list.forEach(item => {
+      if (item.price > max) {
+        max = item.price;
+      }
+      if (item.price < min) {
+        min = item.price;
+      }
+    });
+
+    return { max, min };
+  }
+
+  const resultList = handleSort(handleFilter(handleSearch(productData)));
+  const priceRange = getPriceRange(resultList);
+
   return (
     <div className="product_catalog_container">
       <div className="catalog_title">
@@ -59,9 +78,15 @@ const ProductMain = ({ productData, isProductLoading }) => {
         <Loader />
       ) : (
         <div className="catalog_block">
-          <FiltersBlock setSort={setSort} setFilter={setFilter} setSearchValue={setSearchValue} />
+          <FiltersBlock
+            setSort={setSort}
+            setFilter={setFilter}
+            setSearchValue={setSearchValue}
+            maxPrice={priceRange.max}
+            minPrice={priceRange.min}
+          />
           <div className="catalog_list">
-            <CatalogList products={handleSort(handleFilter(handleSearch(productData)))} />
+            <CatalogList products={resultList} />
           </div>
         </div>
       )}

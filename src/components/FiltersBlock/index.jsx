@@ -2,10 +2,18 @@ import React, { useState, useEffect } from 'react';
 import CommonButton from '../UI/CommonButton';
 import './style.scss';
 
-const FiltersBlock = ({ setSort, setFilter, setSearchValue }) => {
+const FiltersBlock = ({ setSort, setFilter, setSearchValue, maxPrice, minPrice }) => {
   const [selectedSort, setSelectedSort] = useState('');
-  const [maxPrice, setMaxPrice] = useState(9999);
-  const [minPrice, setMinPrice] = useState(0);
+  const [maxSelectedPrice, setMaxSelectedPrice] = useState(9999);
+  const [minSelectedPrice, setMinSelectedPrice] = useState(0);
+
+  useEffect(() => {
+    setMaxSelectedPrice(maxPrice);
+  }, [maxPrice]);
+
+  useEffect(() => {
+    setMinSelectedPrice(minPrice);
+  }, [minPrice]);
 
   const sortOptions = [
     {
@@ -66,8 +74,8 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue }) => {
           </option>
         ))}
       </select>
-      <input className="filter_input" type="text" onChange={(e) => setMaxPrice(e.target.value)} value={maxPrice} placeholder="Max price" />
-      <input className="filter_input" type="text" onChange={(e) => setMinPrice(e.target.value)} value={minPrice} placeholder="Min price" />
+      <input className="filter_input" type="text" onChange={(e) => setMaxSelectedPrice(e.target.value)} value={maxSelectedPrice} placeholder="Max price" />
+      <input className="filter_input" type="text" onChange={(e) => setMinSelectedPrice(e.target.value)} value={minSelectedPrice} placeholder="Min price" />
       <CommonButton onClick={handlePriceClick}>Filter by price</CommonButton>
     </div>
   );
