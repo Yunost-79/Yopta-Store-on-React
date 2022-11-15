@@ -82,7 +82,7 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, maxPrice, minPrice }
   const handlePriceClick = () => {
     setFilter({
       key: 'price',
-      compareFunc: (value) => value >= minPrice && value <= maxPrice,
+      compareFunc: (value) => value >= Number(minPrice) && value <= Number(maxPrice),
     });
   };
 

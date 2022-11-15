@@ -41,8 +41,10 @@ const ProductMain = ({ productData, isProductLoading }) => {
     } else {
       return list;
     }
+    
   };
 
+  
   //Search
 
   const handleSearch = list => {
@@ -69,6 +71,7 @@ const ProductMain = ({ productData, isProductLoading }) => {
 
   const resultList = handleSort(handleFilter(handleSearch(productData)));
   const priceRange = getPriceRange(resultList);
+  console.log(resultList);
 
   return (
     <div className="product_catalog_container">
