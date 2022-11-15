@@ -16,7 +16,7 @@ const Header = () => {
     <header className="header">
       <div className="header_logo">
         <Link to="/" className="logo_link">
-          <img src={LogoImg} />
+          <img src={LogoImg} alt="" />
           <h1>Yopta Store</h1>
         </Link>
       </div>

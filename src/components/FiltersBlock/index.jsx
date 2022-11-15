@@ -40,6 +40,7 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue }) => {
     if (activeSort) {
       setSort(activeSort);
     }
+    // eslint-disable-next-line
   }, [selectedSort]);
 
   const handlePriceClick = () => {
@@ -48,8 +49,6 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue }) => {
       compareFunc: (value) => value > minPrice && value < maxPrice,
     });
   };
-
-  
 
   return (
     <div className="catalog_sort">
