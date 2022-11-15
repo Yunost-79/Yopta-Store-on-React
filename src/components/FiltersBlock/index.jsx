@@ -42,6 +42,34 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, maxPrice, minPrice }
     },
   ];
 
+  const categoryOptions = [
+    {
+      id: 1,
+      label: 'Electronics',
+      key: 'electronics',
+    },
+    {
+      id: 2,
+      label: 'Jewelery',
+      key: 'jewelery',
+    },
+    {
+      id: 3,
+      label: "Men's clothing",
+      key: "men's clothing",
+    },
+    {
+      id: 4,
+      label: "Women's clothing",
+      key: "women's clothing",
+    },
+    {
+      id: 5,
+      label: 'All categories',
+      key: 'all categories',
+    },
+  ];
+
   useEffect(() => {
     const activeSort = sortOptions.find((it) => Number(it.id) === Number(selectedSort));
 
@@ -54,7 +82,7 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, maxPrice, minPrice }
   const handlePriceClick = () => {
     setFilter({
       key: 'price',
-      compareFunc: (value) => value > minPrice && value < maxPrice,
+      compareFunc: (value) => value >= minPrice && value <= maxPrice,
     });
   };
 
@@ -62,15 +90,24 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, maxPrice, minPrice }
     <div className="catalog_sort">
       <span className="sort_filter_title">Sorting</span>
 
-      <input type="text" name="search" placeholder="Search..." onChange={(e) => setSearchValue(e.target.value)} />
+      <input className="filter_search" type="text" name="search" placeholder="Search..." onChange={(e) => setSearchValue(e.target.value)} />
 
       <select className="sort_select" value={selectedSort} onChange={(e) => setSelectedSort(e.target.value)}>
         <option className="sort_selected_option_disabled" disabled value="">
           Select
         </option>
-        {sortOptions.map((option) => (
-          <option className="sort_selected_option_active" value={option.id} key={option.label}>
-            {option.label}
+        {sortOptions.map((optionSort) => (
+          <option className="sort_selected_option_active" value={optionSort.id} key={optionSort.label}>
+            {optionSort.label}
+          </option>
+        ))}
+      </select>
+
+      <select className="sort_select">
+        <option className="sort_selected_option_disabled">Categories</option>
+        {categoryOptions.map((optionCateg) => (
+          <option className="sort_selected_option_active" value={optionCateg.id} key={optionCateg.label}>
+            {optionCateg.label}
           </option>
         ))}
       </select>

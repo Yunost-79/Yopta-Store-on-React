@@ -10,6 +10,7 @@ const ProductMain = ({ productData, isProductLoading }) => {
   const [filter, setFilter] = useState(null);
   const [searchValue, setSearchValue] = useState('');
 
+
   //Sorting by low/high price and name
   const handleSort = (list) => {
     if (sort) {

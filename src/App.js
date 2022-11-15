@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from './API/ProductService';
-import './App.scss';
 import { Routes, Route } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
@@ -10,6 +9,7 @@ import Basket from './pages/Basket';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+import './App.scss';
 import './variables/variablesStyle.scss';
 
 function App() {
