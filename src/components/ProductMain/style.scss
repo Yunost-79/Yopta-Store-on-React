@@ -14,11 +14,13 @@
 
   & .catalog_block {
     display: flex;
+    width: 100%;
 
     & .catalog_list {
       position: relative;
       display: flex;
-      flex: 1 1 85%;
+      flex: 1 1 95%;
+      width: 100%;
       flex-wrap: wrap;
       justify-content: flex-start;
       margin: 15px 0;

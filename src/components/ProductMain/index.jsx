@@ -9,9 +9,10 @@ const ProductMain = ({ productData, isProductLoading }) => {
   const [sort, setSort] = useState(null);
   const [filter, setFilter] = useState(null);
   const [searchValue, setSearchValue] = useState('');
-
+  const [categoryValue, setCategoryValue] = useState('');
 
   //Sorting by low/high price and name
+
   const handleSort = (list) => {
     if (sort) {
       return list?.sort((a, b) => {
@@ -29,11 +30,29 @@ const ProductMain = ({ productData, isProductLoading }) => {
     }
   };
 
+  //Category sort
+
+  const handleCategoryList = (list) => {
+    return list.filter((item) => {
+      if (categoryValue === 'all categories') {
+        return item;
+      }
+      if (item.category === categoryValue) {
+        return categoryValue;
+      }
+      if (categoryValue === '') {
+        return item;
+      }
+      return;
+    });
+  };
+
   //Filter by price
 
-  const handleFilter = list => {
+  const handleFilter = (list) => {
     if (filter) {
       return list?.filter((elem) => {
+        console.log(list);
         const data = elem[filter.key];
         const value = filter.compareFunc(data);
         return value;
@@ -41,23 +60,13 @@ const ProductMain = ({ productData, isProductLoading }) => {
     } else {
       return list;
     }
-    
   };
 
-  
-  //Search
-
-  const handleSearch = list => {
-    return list.filter((item) => {
-      return item.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
-    });
-  };
-
-  const getPriceRange = list => {
+  const getPriceRange = (list) => {
     let max = list[0]?.price || 9999;
     let min = list[0]?.price || 0;
 
-    list.forEach(item => {
+    list.forEach((item) => {
       if (item.price > max) {
         max = item.price;
       }
@@ -67,11 +76,18 @@ const ProductMain = ({ productData, isProductLoading }) => {
     });
 
     return { max, min };
-  }
+  };
 
-  const resultList = handleSort(handleFilter(handleSearch(productData)));
+  //Search
+
+  const handleSearch = (list) => {
+    return list.filter((item) => {
+      return item.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
+    });
+  };
+
+  const resultList = handleCategoryList(handleSort(handleFilter(handleSearch(productData))));
   const priceRange = getPriceRange(resultList);
-  console.log(resultList);
 
   return (
     <div className="product_catalog_container">
@@ -85,6 +101,8 @@ const ProductMain = ({ productData, isProductLoading }) => {
           <FiltersBlock
             setSort={setSort}
             setFilter={setFilter}
+            categoryValue={categoryValue}
+            setCategoryValue={setCategoryValue}
             setSearchValue={setSearchValue}
             maxPrice={priceRange.max}
             minPrice={priceRange.min}

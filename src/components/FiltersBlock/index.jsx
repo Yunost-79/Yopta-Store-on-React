@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CommonButton from '../UI/CommonButton';
 import './style.scss';
 
-const FiltersBlock = ({ setSort, setFilter, setSearchValue, maxPrice, minPrice }) => {
+const FiltersBlock = ({ setSort, setFilter, setSearchValue, categoryValue, setCategoryValue, maxPrice, minPrice }) => {
   const [selectedSort, setSelectedSort] = useState('');
   const [maxSelectedPrice, setMaxSelectedPrice] = useState(9999);
   const [minSelectedPrice, setMinSelectedPrice] = useState(0);
@@ -84,15 +84,18 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, maxPrice, minPrice }
       key: 'price',
       compareFunc: (value) => value >= Number(minPrice) && value <= Number(maxPrice),
     });
+    console.log('price');
   };
+
+  
 
   return (
     <div className="catalog_sort">
       <span className="sort_filter_title">Sorting</span>
 
-      <input className="filter_search" type="text" name="search" placeholder="Search..." onChange={(e) => setSearchValue(e.target.value)} />
+      <input className="filter_search sort_item" type="text" name="search" placeholder="Search..." onChange={(e) => setSearchValue(e.target.value)} />
 
-      <select className="sort_select" value={selectedSort} onChange={(e) => setSelectedSort(e.target.value)}>
+      <select className="sort_select sort_item" value={selectedSort} onChange={(e) => setSelectedSort(e.target.value)}>
         <option className="sort_selected_option_disabled" disabled value="">
           Select
         </option>
@@ -103,16 +106,32 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, maxPrice, minPrice }
         ))}
       </select>
 
-      <select className="sort_select">
-        <option className="sort_selected_option_disabled">Categories</option>
+      <select className="sort_select sort_item" value={categoryValue} onChange={(e) => setCategoryValue(e.target.value)}>
+        <option className="sort_selected_option_disabled" disabled value="">
+          Categories
+        </option>
         {categoryOptions.map((optionCateg) => (
-          <option className="sort_selected_option_active" value={optionCateg.id} key={optionCateg.label}>
+          <option className="sort_selected_option_active" value={optionCateg.key} key={optionCateg.key}>
             {optionCateg.label}
           </option>
         ))}
       </select>
-      <input className="filter_input" type="text" onChange={(e) => setMaxSelectedPrice(e.target.value)} value={maxSelectedPrice} placeholder="Max price" />
-      <input className="filter_input" type="text" onChange={(e) => setMinSelectedPrice(e.target.value)} value={minSelectedPrice} placeholder="Min price" />
+      <input
+        className="filter_input sort_item disabled"
+        type="text"
+        onChange={(e) => setMaxSelectedPrice(e.target.value)}
+        value={maxSelectedPrice}
+        placeholder="Max price"
+        disabled
+      />
+      <input
+        className="filter_input sort_item disabled"
+        type="text"
+        onChange={(e) => setMinSelectedPrice(e.target.value)}
+        value={minSelectedPrice}
+        placeholder="Min price"
+        disabled
+      />
       <CommonButton onClick={handlePriceClick}>Filter by price</CommonButton>
     </div>
   );
