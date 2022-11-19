@@ -1,29 +1,19 @@
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { red } from '@mui/material/colors';
 import React, { useState, useEffect } from 'react';
-import CommonButton from '../UI/CommonButton';
 import './style.scss';
 
-const FiltersBlock = ({
-  setSort,
-  setFilter,
-  setSearchValue,
-  categoryValue,
-  setCategoryValue,
-  filterPriceValue,
-  setFilterPriceValue,
-  maxPrice,
-  minPrice,
-}) => {
+const styles = {
+  textInput: {
+    marginTop: '15px',
+    borderColor: red[500],
+  },
+
+  
+};
+
+const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue, setMaxSelectedPrice, setMinSelectedPrice, setClearValues }) => {
   const [selectedSort, setSelectedSort] = useState('');
-  const [maxSelectedPrice, setMaxSelectedPrice] = useState(9999);
-  const [minSelectedPrice, setMinSelectedPrice] = useState(0);
-
-  useEffect(() => {
-    setMaxSelectedPrice(maxPrice);
-  }, [maxPrice]);
-
-  useEffect(() => {
-    setMinSelectedPrice(minPrice);
-  }, [minPrice]);
 
   const sortOptions = [
     {
@@ -89,62 +79,52 @@ const FiltersBlock = ({
     // eslint-disable-next-line
   }, [selectedSort]);
 
-  const handlePriceClick = () => {
-    setFilter({
-      key: 'price',
-      compareFunc: (value) => value >= Number(minPrice) && value <= Number(maxPrice),
-    });
-  };
-
-
-
   return (
     <div className="catalog_sort">
       <span className="sort_filter_title">Sorting</span>
 
-      <input className="filter_search sort_item" type="text" name="search" placeholder="Search..." onChange={(e) => setSearchValue(e.target.value)} />
+      <TextField style={styles.textInput} id="search_filter" label="Search" variant="standard" onChange={(e) => setSearchValue(e.target.value)} />
 
-      <select className="sort_select sort_item" value={selectedSort} onChange={(e) => setSelectedSort(e.target.value)}>
-        <option className="sort_selected_option_disabled" disabled value="">
-          Select sorting...
-        </option>
-        {sortOptions.map((optionSort) => (
-          <option className="sort_selected_option_active" value={optionSort.id} key={optionSort.label}>
-            {optionSort.label}
-          </option>
-        ))}
-      </select>
+      <FormControl style={styles.textInput} fullWidth>
+        <InputLabel id="select_sorting">Select sorting...</InputLabel>
+        <Select
+          labelId="select_sorting"
+          id="select_sorting_item"
+          value={selectedSort}
+          label="Sorting"
+          onChange={(e) => setSelectedSort(e.target.value)}
+        >
+          {sortOptions.map((optionSort) => (
+            <MenuItem style={styles.textInput} value={optionSort.id} key={optionSort.label}>
+              {optionSort.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
-      <select className="sort_select sort_item" value={categoryValue} onChange={(e) => setCategoryValue(e.target.value)}>
-        <option className="sort_selected_option_disabled" disabled value="">
-          Categories
-        </option>
-        {categoryOptions.map((optionCateg) => (
-          <option className="sort_selected_option_active" value={optionCateg.key} key={optionCateg.key}>
-            {optionCateg.label}
-          </option>
-        ))}
-      </select>
+      <FormControl style={styles.textInput} fullWidth>
+        <InputLabel id="sort_select">Select category...</InputLabel>
+        <Select
+          labelId="sort_select"
+          id="sort_select_item"
+          value={categoryValue}
+          label="Categories"
+          onChange={(e) => setCategoryValue(e.target.value)}
+        >
+          {categoryOptions.map((optionCateg) => (
+            <MenuItem value={optionCateg.key} key={optionCateg.key}>
+              {optionCateg.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
-      <input type="range" max ={maxPrice} min={minPrice}  value={filterPriceValue} onChange={(e) =>{setFilterPriceValue(e.target.value)}} />
-      <p>Max price: {filterPriceValue}</p>
-      {/* <input
-        className="filter_input sort_item disabled"
-        type="text"
-        onChange={(e) => setMaxSelectedPrice(e.target.value)}
-        value={maxSelectedPrice}
-        placeholder="Max price"
-        disabled
-      />
-      <input
-        className="filter_input sort_item disabled"
-        type="text"
-        onChange={(e) => setMinSelectedPrice(e.target.value)}
-        value={minSelectedPrice}
-        placeholder="Min price"
-        disabled
-      /> */}
-      <CommonButton onClick={handlePriceClick}>Filter by price</CommonButton>
+      <div className="price_fields">
+        <TextField id="max_price_filter" label="Max price" variant="standard" onChange={(e) => setMaxSelectedPrice(e.target.value)} />
+        <TextField id="min_price_filter" label="Min price" variant="standard" onChange={(e) => setMinSelectedPrice(e.target.value)} />
+      </div>
+
+      {/* <CommonButton>Clear all</CommonButton> */}
     </div>
   );
 };
