@@ -10,6 +10,7 @@ const ProductMain = ({ productData, isProductLoading }) => {
   const [filter, setFilter] = useState(null);
   const [searchValue, setSearchValue] = useState('');
   const [categoryValue, setCategoryValue] = useState('');
+  const [filterPriceValue, setFilterPriceValue] = useState('');
 
   //Sorting by low/high price and name
 
@@ -86,8 +87,19 @@ const ProductMain = ({ productData, isProductLoading }) => {
     });
   };
 
+  //Filter price
+
+  const handleFilterPrice = (list) => {
+    return list.filter((item) => {
+      return item.price >= filterPriceValue;
+    });
+  };
+
   const resultList = handleCategoryList(handleSort(handleFilter(handleSearch(productData))));
   const priceRange = getPriceRange(resultList);
+  const filterList = handleFilterPrice(resultList);
+
+  console.log(handleFilterPrice(resultList));
 
   return (
     <div className="product_catalog_container">
@@ -104,11 +116,14 @@ const ProductMain = ({ productData, isProductLoading }) => {
             categoryValue={categoryValue}
             setCategoryValue={setCategoryValue}
             setSearchValue={setSearchValue}
+            filterPriceValue={filterPriceValue}
+            setFilterPriceValue={setFilterPriceValue}
+            resultList={resultList}
             maxPrice={priceRange.max}
             minPrice={priceRange.min}
           />
           <div className="catalog_list">
-            <CatalogList products={resultList} />
+            <CatalogList products={filterList} />
           </div>
         </div>
       )}

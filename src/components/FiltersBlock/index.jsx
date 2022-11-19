@@ -2,7 +2,17 @@ import React, { useState, useEffect } from 'react';
 import CommonButton from '../UI/CommonButton';
 import './style.scss';
 
-const FiltersBlock = ({ setSort, setFilter, setSearchValue, categoryValue, setCategoryValue, maxPrice, minPrice }) => {
+const FiltersBlock = ({
+  setSort,
+  setFilter,
+  setSearchValue,
+  categoryValue,
+  setCategoryValue,
+  filterPriceValue,
+  setFilterPriceValue,
+  maxPrice,
+  minPrice,
+}) => {
   const [selectedSort, setSelectedSort] = useState('');
   const [maxSelectedPrice, setMaxSelectedPrice] = useState(9999);
   const [minSelectedPrice, setMinSelectedPrice] = useState(0);
@@ -84,10 +94,9 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, categoryValue, setCa
       key: 'price',
       compareFunc: (value) => value >= Number(minPrice) && value <= Number(maxPrice),
     });
-    console.log('price');
   };
 
-  
+
 
   return (
     <div className="catalog_sort">
@@ -97,7 +106,7 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, categoryValue, setCa
 
       <select className="sort_select sort_item" value={selectedSort} onChange={(e) => setSelectedSort(e.target.value)}>
         <option className="sort_selected_option_disabled" disabled value="">
-          Select
+          Select sorting...
         </option>
         {sortOptions.map((optionSort) => (
           <option className="sort_selected_option_active" value={optionSort.id} key={optionSort.label}>
@@ -116,7 +125,10 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, categoryValue, setCa
           </option>
         ))}
       </select>
-      <input
+
+      <input type="range" max ={maxPrice} min={minPrice}  value={filterPriceValue} onChange={(e) =>{setFilterPriceValue(e.target.value)}} />
+      <p>Max price: {filterPriceValue}</p>
+      {/* <input
         className="filter_input sort_item disabled"
         type="text"
         onChange={(e) => setMaxSelectedPrice(e.target.value)}
@@ -131,7 +143,7 @@ const FiltersBlock = ({ setSort, setFilter, setSearchValue, categoryValue, setCa
         value={minSelectedPrice}
         placeholder="Min price"
         disabled
-      />
+      /> */}
       <CommonButton onClick={handlePriceClick}>Filter by price</CommonButton>
     </div>
   );
