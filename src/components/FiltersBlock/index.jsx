@@ -91,7 +91,7 @@ const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue
       />
 
       <FormControl style={styles.textInputMarginTop} fullWidth>
-        <InputLabel id="select_sorting" sx={{ top: '-7px', '&.Mui-focused': { top: 0 } }}>
+        <InputLabel id="select_sorting" sx={{ top: '-7px', '&.Mui-focused': { top: 0 }, '&.MuiFormLabel-filled': { top: 0 }  }}>
           Select sorting...
         </InputLabel>
         <Select
@@ -110,7 +110,7 @@ const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue
       </FormControl>
 
       <FormControl style={styles.textInputMarginTop} fullWidth>
-        <InputLabel id="sort_select" sx={{ top: '-7px', '&.Mui-focused': { top: 0 } }}>
+        <InputLabel id="sort_select" sx={{ top: '-7px', '&.Mui-focused': { top: 0 }, '&.MuiFormLabel-filled': { top: 0 } }}>
           Select category...
         </InputLabel>
         <Select
