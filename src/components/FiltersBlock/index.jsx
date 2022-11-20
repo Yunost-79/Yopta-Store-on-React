@@ -1,15 +1,14 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import { red } from '@mui/material/colors';
 import React, { useState, useEffect } from 'react';
 import './style.scss';
 
 const styles = {
-  textInput: {
-    marginTop: '15px',
-    borderColor: red[500],
+  textInputSelect: {
+    top: '-8px',
   },
-
-  
+  textInputMarginTop: {
+    marginTop: '15px',
+  },
 };
 
 const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue, setMaxSelectedPrice, setMinSelectedPrice, setClearValues }) => {
@@ -83,15 +82,23 @@ const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue
     <div className="catalog_sort">
       <span className="sort_filter_title">Sorting</span>
 
-      <TextField style={styles.textInput} id="search_filter" label="Search" variant="standard" onChange={(e) => setSearchValue(e.target.value)} />
+      <TextField
+        id="search_filter"
+        label="Search"
+        variant="standard"
+        style={styles.textInputMarginTop}
+        onChange={(e) => setSearchValue(e.target.value)}
+      />
 
-      <FormControl style={styles.textInput} fullWidth>
-        <InputLabel id="select_sorting">Select sorting...</InputLabel>
+      <FormControl style={styles.textInputMarginTop} fullWidth>
+        <InputLabel id="select_sorting" sx={{ top: '-7px', '&.Mui-focused': { top: 0 } }}>
+          Select sorting...
+        </InputLabel>
         <Select
           labelId="select_sorting"
           id="select_sorting_item"
           value={selectedSort}
-          label="Sorting"
+          label="Select sorting..."
           onChange={(e) => setSelectedSort(e.target.value)}
         >
           {sortOptions.map((optionSort) => (
@@ -102,13 +109,15 @@ const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue
         </Select>
       </FormControl>
 
-      <FormControl style={styles.textInput} fullWidth>
-        <InputLabel id="sort_select">Select category...</InputLabel>
+      <FormControl style={styles.textInputMarginTop} fullWidth>
+        <InputLabel id="sort_select" sx={{ top: '-7px', '&.Mui-focused': { top: 0 } }}>
+          Select category...
+        </InputLabel>
         <Select
           labelId="sort_select"
           id="sort_select_item"
           value={categoryValue}
-          label="Categories"
+          label="Select category..."
           onChange={(e) => setCategoryValue(e.target.value)}
         >
           {categoryOptions.map((optionCateg) => (
@@ -120,8 +129,20 @@ const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue
       </FormControl>
 
       <div className="price_fields">
-        <TextField id="max_price_filter" label="Max price" variant="standard" onChange={(e) => setMaxSelectedPrice(e.target.value)} />
-        <TextField id="min_price_filter" label="Min price" variant="standard" onChange={(e) => setMinSelectedPrice(e.target.value)} />
+        <TextField
+          id="max_price_filter"
+          label="Max price"
+          variant="standard"
+          style={styles.textInputMarginTop}
+          onChange={(e) => setMaxSelectedPrice(e.target.value)}
+        />
+        <TextField
+          id="min_price_filter"
+          label="Min price"
+          variant="standard"
+          style={styles.textInputMarginTop}
+          onChange={(e) => setMinSelectedPrice(e.target.value)}
+        />
       </div>
 
       {/* <CommonButton>Clear all</CommonButton> */}
