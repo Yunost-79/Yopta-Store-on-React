@@ -1,9 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import CommonButton from '../UI/CommonButton';
 
 import './style.scss';
 
-const CatalogList = ({ products }) => {
+const CatalogList = ({ products, setSingleProductId }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       {products.map((elem) => (
@@ -13,7 +16,7 @@ const CatalogList = ({ products }) => {
             <h3 className="product_title">{elem.title}</h3>
             <span className="product_price">{elem.price} &#x20AC;</span>
             <span className="product_category">{elem.category.name}</span>
-            <CommonButton>Open Details</CommonButton>
+            <CommonButton onClick={() => navigate(`/product/${elem.id}`)}>Open Details</CommonButton>
           </div>
         </div>
       ))}
