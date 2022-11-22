@@ -17,30 +17,26 @@ function App() {
   const [productData, setProductData] = useState([]);
   const [isProductLoading, setIsProductLoading] = useState(false);
 
-  const [singleProductId, setSingleProductId] = useState('');
-
-
   useEffect(() => {
     handleGetData();
   }, []);
 
   const handleGetData = async () => {
     setIsProductLoading(true);
-    const data = await fetchData();
+    const data = await fetchData("/products");
     const products = data.data;
     setProductData(products);
     setIsProductLoading(false);
   };
 
-
   return (
     <div className="wrapper">
       <Header />
       <Routes>
-        <Route index element={<HomePage productData={productData} isProductLoading={isProductLoading} setSingleProductId={setSingleProductId} />} />
+        <Route index element={<HomePage productData={productData} isProductLoading={isProductLoading} />} />
         <Route path="/about" element={<About />} />
         <Route path="/basket" element={<Basket />} />
-        <Route path="/product/:id" element={<ProductPage setIsProductLoading={setIsProductLoading} />} />
+        <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
       <Footer />
     </div>

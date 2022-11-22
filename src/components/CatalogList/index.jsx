@@ -4,7 +4,7 @@ import CommonButton from '../UI/CommonButton';
 
 import './style.scss';
 
-const CatalogList = ({ products, setSingleProductId }) => {
+const CatalogList = ({ products }) => {
   const navigate = useNavigate();
 
   return (

@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-// const urlAPI = 'https://fakestoreapi.com';
+const urlAPI = 'https://fakestoreapi.com';
 
-export const fetchData = async () => {
-  const result = await axios('https://fakestoreapi.com/products');
-  
+export const fetchData = async (url) => {
+  const result = await axios(urlAPI + url);
   return result;
 };
 

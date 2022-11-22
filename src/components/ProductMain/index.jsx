@@ -5,7 +5,7 @@ import Loader from '../UI/Loader';
 import CatalogList from '../CatalogList';
 import FiltersBlock from '../FiltersBlock';
 
-const ProductMain = ({ productData, isProductLoading, setSingleProductId }) => {
+const ProductMain = ({ productData, isProductLoading }) => {
   const [sort, setSort] = useState(null);
   const [filter, setFilter] = useState(null);
   const [searchValue, setSearchValue] = useState('');
@@ -124,7 +124,7 @@ const ProductMain = ({ productData, isProductLoading, setSingleProductId }) => {
             setMinSelectedPrice={setMinSelectedPrice}
           />
           <div className="catalog_list">
-            <CatalogList products={resultList} setSingleProductId={setSingleProductId} />
+            <CatalogList products={resultList} />
           </div>
         </div>
       )}

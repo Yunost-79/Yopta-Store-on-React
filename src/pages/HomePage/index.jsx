@@ -4,11 +4,11 @@ import './style.scss';
 import PreviewMain from '../../components/PreviewMain';
 import ProductMain from '../../components/ProductMain';
 
-const HomePage = ({ productData, isProductLoading, setSingleProductId }) => {
+const HomePage = ({ productData, isProductLoading }) => {
   return (
     <div className="main">
       <PreviewMain />
-      <ProductMain productData={productData} isProductLoading={isProductLoading} setSingleProductId={setSingleProductId}/>
+      <ProductMain productData={productData} isProductLoading={isProductLoading} />
     </div>
   );
 };
