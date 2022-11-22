@@ -6,6 +6,7 @@
 
   & .wrapper {
     padding: 30px 85px;
+    min-height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,7 +38,8 @@
     & .product_content {
       display: flex;
       gap: 20px;
-      margin-top: 40px;
+      margin: auto 0;
+
 
       & .image {
         flex: 1 1 40%;
@@ -70,12 +72,12 @@
         }
       }
 
-      & .buttons{
-        & .product_btn{
+      & .buttons {
+        & .product_btn {
           padding: 15px 45px;
           font-size: 18px;
 
-          &:last-of-type{
+          &:last-of-type {
             margin-left: 15px;
           }
         }

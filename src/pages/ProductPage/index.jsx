@@ -39,7 +39,6 @@ const ProductPage = () => {
           <div className="image">
             <img src={productData?.image} alt={productData?.title} />
           </div>
-
           <div className="subtitle">
             <div className="subtitle_item">
               <span>Category:</span>
@@ -61,7 +60,6 @@ const ProductPage = () => {
               <span>In Stock:</span>
               {productData?.rating.count}
             </div>
-            <></>
           </div>
         </div>
       </div>
