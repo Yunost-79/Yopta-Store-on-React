@@ -5,7 +5,7 @@ import Loader from '../UI/Loader';
 import CatalogList from '../CatalogList';
 import FiltersBlock from '../FiltersBlock';
 
-const ProductMain = ({ productData, isProductLoading }) => {
+const ProductMain = ({ productsList, isProductLoading }) => {
   const [sort, setSort] = useState(null);
   const [filter, setFilter] = useState(null);
   const [searchValue, setSearchValue] = useState('');
@@ -100,7 +100,7 @@ const ProductMain = ({ productData, isProductLoading }) => {
 
   //Sorted and filtered data from API
 
-  const resultList = handleCategoryList(handleFilterPrice(handleSort(handleFilter(handleSearch(productData)))));
+  const resultList = handleCategoryList(handleFilterPrice(handleSort(handleFilter(handleSearch(productsList)))));
 
 
   // const priceRange = getPriceRange(resultList);

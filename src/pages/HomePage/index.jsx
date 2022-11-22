@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 
 import PreviewMain from '../../components/PreviewMain';
 import ProductMain from '../../components/ProductMain';
+import { fetchData } from '../../API/ProductService';
 
-const HomePage = ({ productData, isProductLoading }) => {
+const HomePage = () => {
+  const [productsList, setProductsList] = useState([]);
+  const [isProductLoading, setIsProductLoading] = useState(false);
+
+  useEffect(() => {
+    handleGetData();
+  }, []);
+
+  const handleGetData = async () => {
+    setIsProductLoading(true);
+    const data = await fetchData('/products');
+    const products = data.data;
+    setProductsList(products);
+    setIsProductLoading(false);
+  };
   return (
     <div className="main">
       <PreviewMain />
-      <ProductMain productData={productData} isProductLoading={isProductLoading} />
+      <ProductMain productsList={productsList} isProductLoading={isProductLoading} />
     </div>
   );
 };

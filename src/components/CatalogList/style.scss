@@ -13,7 +13,7 @@
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
     & .product_image {
-      filter: blur(2px) grayscale(90%);
+      filter: grayscale(85%);
     }
   }
 
@@ -24,7 +24,7 @@
     max-height: 250px;
     max-height: auto;
     object-fit: contain;
-    filter: blur(0) grayscale(0);
+    filter: grayscale(0);
     cursor: pointer;
 
     transition: 0.5s all;
