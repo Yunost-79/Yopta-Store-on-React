@@ -12,6 +12,7 @@ import './style.scss';
 const ProductPage = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     handleGetData();
@@ -24,7 +25,6 @@ const ProductPage = () => {
     }
   };
 
-  const navigate = useNavigate();
 
   return (
     <div className="product_page">
@@ -65,7 +65,6 @@ const ProductPage = () => {
           </div>
         </div>
         <BackButton text="Come Back" onClick={()=>{navigate('/')}}></BackButton>
-        {/* onClick={() => navigate('/')} */}
       </div>
     </div>
   );
