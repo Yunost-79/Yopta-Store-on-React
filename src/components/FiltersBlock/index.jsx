@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import CommonButton from '../UI/CommonButton';
 import './style.scss';
 
@@ -17,6 +17,9 @@ const FiltersBlock = ({
   setSort,
   searchValue,
   setSearchValue,
+  selectedSort,
+  setSelectedSort,
+
   categoryValue,
   setCategoryValue,
   maxSelectedPrice,
@@ -26,7 +29,7 @@ const FiltersBlock = ({
   handleClearValues,
   priceRange,
 }) => {
-  const [selectedSort, setSelectedSort] = useState('');
+
 
   const sortOptions = [
     {
@@ -150,19 +153,19 @@ const FiltersBlock = ({
           id="max_price_filter"
           label="Max price"
           variant="standard"
-          value={priceRange.max}
+          value={maxSelectedPrice}
           type="text"
           style={styles.textInputMarginTop}
-          onChange={(e) => setMaxSelectedPrice(e.target.value.replace(/\D/g, ""))}
+          onChange={(e) => setMaxSelectedPrice(e.target.value.replace(/\D/g, ''))}
         />
         <TextField
           id="min_price_filter"
           label="Min price"
           variant="standard"
-          value={priceRange.min}
+          value={minSelectedPrice}
           type="text"
           style={styles.textInputMarginTop}
-          onChange={(e) => setMinSelectedPrice(e.target.value.replace(/\D/g, ""))}
+          onChange={(e) => setMinSelectedPrice(e.target.value.replace(/\D/g, ''))}
         />
       </div>
 

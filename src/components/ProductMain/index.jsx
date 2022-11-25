@@ -11,6 +11,8 @@ const ProductMain = ({ productsList, isProductLoading }) => {
   const [sort, setSort] = useState(null);
   const [filter, setFilter] = useState(null);
   const [searchValue, setSearchValue] = useState('');
+  const [selectedSort, setSelectedSort] = useState('');
+
   const [categoryValue, setCategoryValue] = useState('');
   const [priceRange, setPriceRange] = useState({ min: 0, max: 9999 });
   const [maxSelectedPrice, setMaxSelectedPrice] = useState(99999);
@@ -20,11 +22,9 @@ const ProductMain = ({ productsList, isProductLoading }) => {
     setResultList(handleCategoryList(handleFilterPrice(handleSort(handleFilter(handleSearch(productsList))))));
   }, [productsList, sort, filter, searchValue, categoryValue, maxSelectedPrice, minSelectedPrice]);
 
-  useEffect(()=>{
-    setPriceRange(getPriceRange(resultList))
-  },[resultList])
-
-
+  useEffect(() => {
+    setPriceRange(getPriceRange(resultList));
+  }, [resultList]);
 
   //Sorting by low/high price and name
 
@@ -117,6 +117,7 @@ const ProductMain = ({ productsList, isProductLoading }) => {
     setSort(null);
     setFilter(null);
     setSearchValue('');
+    setSelectedSort('');
     setCategoryValue('');
     setMaxSelectedPrice(9999);
     setMinSelectedPrice(0);
@@ -136,6 +137,8 @@ const ProductMain = ({ productsList, isProductLoading }) => {
           <FiltersBlock
             sort={sort}
             setSort={setSort}
+            selectedSort={selectedSort}
+            setSelectedSort={setSelectedSort}
             categoryValue={categoryValue}
             setCategoryValue={setCategoryValue}
             searchValue={searchValue}
