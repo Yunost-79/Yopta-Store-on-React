@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchData } from '../../API/ProductService';
 
 import CommonButton from '../../components/UI/CommonButton';
+import BackButton from '../../components/UI/BackButton';
 
 import Star from '../../images/star.svg';
 
@@ -23,7 +24,8 @@ const ProductPage = () => {
     }
   };
 
-  console.log(productData?.title);
+  const navigate = useNavigate();
+
   return (
     <div className="product_page">
       <div className="wrapper">
@@ -62,6 +64,8 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
+        <BackButton text="Come Back" onClick={()=>{navigate('/')}}></BackButton>
+        {/* onClick={() => navigate('/')} */}
       </div>
     </div>
   );

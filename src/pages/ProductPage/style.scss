@@ -73,13 +73,13 @@
       }
 
       & .buttons {
+        display: flex;
+        gap: 15px;
+        
         & .product_btn {
           padding: 15px 45px;
           font-size: 18px;
 
-          &:last-of-type {
-            margin-left: 15px;
-          }
         }
       }
     }

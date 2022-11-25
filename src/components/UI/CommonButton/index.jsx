@@ -5,7 +5,7 @@ import './style.scss';
 const CommonButton = (props) => {
   const { children, className, ...restProps } = props;
   return (
-    <button className={`common_btn ${className}`} {...restProps}>
+    <button className={`common_btn ${className ? className : ''}`} {...restProps}>
       {children}
     </button>
   );

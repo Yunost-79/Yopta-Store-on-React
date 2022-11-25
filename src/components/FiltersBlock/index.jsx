@@ -95,7 +95,6 @@ const FiltersBlock = ({
     // eslint-disable-next-line
   }, [selectedSort]);
 
-  console.log(searchValue);
 
   return (
     <div className="catalog_sort">
