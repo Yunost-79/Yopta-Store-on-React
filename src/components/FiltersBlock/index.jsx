@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+import CommonButton from '../UI/CommonButton';
 import './style.scss';
 
 const styles = {
@@ -11,7 +12,20 @@ const styles = {
   },
 };
 
-const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue, setMaxSelectedPrice, setMinSelectedPrice, setClearValues }) => {
+const FiltersBlock = ({
+  sort,
+  setSort,
+  searchValue,
+  setSearchValue,
+  categoryValue,
+  setCategoryValue,
+  maxSelectedPrice,
+  setMaxSelectedPrice,
+  minSelectedPrice,
+  setMinSelectedPrice,
+  handleClearValues,
+  priceRange,
+}) => {
   const [selectedSort, setSelectedSort] = useState('');
 
   const sortOptions = [
@@ -70,13 +84,15 @@ const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue
   ];
 
   useEffect(() => {
-    const activeSort = sortOptions.find((it) => Number(it.id) === Number(selectedSort));
+    const activeSort = sortOptions.find((it) => +it.id === +selectedSort);
 
     if (activeSort) {
       setSort(activeSort);
     }
     // eslint-disable-next-line
   }, [selectedSort]);
+
+  console.log(searchValue);
 
   return (
     <div className="catalog_sort">
@@ -87,11 +103,12 @@ const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue
         label="Search"
         variant="standard"
         style={styles.textInputMarginTop}
+        value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
 
       <FormControl style={styles.textInputMarginTop} fullWidth>
-        <InputLabel id="select_sorting" sx={{ top: '-7px', '&.Mui-focused': { top: 0 }, '&.MuiFormLabel-filled': { top: 0 }  }}>
+        <InputLabel id="select_sorting" sx={{ top: '-7px', '&.Mui-focused': { top: 0 }, '&.MuiFormLabel-filled': { top: 0 } }}>
           Select sorting...
         </InputLabel>
         <Select
@@ -133,19 +150,23 @@ const FiltersBlock = ({ setSort, setSearchValue, categoryValue, setCategoryValue
           id="max_price_filter"
           label="Max price"
           variant="standard"
+          value={priceRange.max}
+          type="text"
           style={styles.textInputMarginTop}
-          onChange={(e) => setMaxSelectedPrice(e.target.value)}
+          onChange={(e) => setMaxSelectedPrice(e.target.value.replace(/\D/g, ""))}
         />
         <TextField
           id="min_price_filter"
           label="Min price"
           variant="standard"
+          value={priceRange.min}
+          type="text"
           style={styles.textInputMarginTop}
-          onChange={(e) => setMinSelectedPrice(e.target.value)}
+          onChange={(e) => setMinSelectedPrice(e.target.value.replace(/\D/g, ""))}
         />
       </div>
 
-      {/* <CommonButton>Clear all</CommonButton> */}
+      <CommonButton onClick={handleClearValues}>Clear all</CommonButton>
     </div>
   );
 };

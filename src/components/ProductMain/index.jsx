@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './style.scss';
 import Loader from '../UI/Loader';
@@ -6,12 +6,25 @@ import CatalogList from '../CatalogList';
 import FiltersBlock from '../FiltersBlock';
 
 const ProductMain = ({ productsList, isProductLoading }) => {
+  const [resultList, setResultList] = useState([]);
+
   const [sort, setSort] = useState(null);
   const [filter, setFilter] = useState(null);
   const [searchValue, setSearchValue] = useState('');
   const [categoryValue, setCategoryValue] = useState('');
-  const [maxSelectedPrice, setMaxSelectedPrice] = useState(9999);
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 9999 });
+  const [maxSelectedPrice, setMaxSelectedPrice] = useState(99999);
   const [minSelectedPrice, setMinSelectedPrice] = useState(0);
+
+  useEffect(() => {
+    setResultList(handleCategoryList(handleFilterPrice(handleSort(handleFilter(handleSearch(productsList))))));
+  }, [productsList, sort, filter, searchValue, categoryValue, maxSelectedPrice, minSelectedPrice]);
+
+  useEffect(()=>{
+    setPriceRange(getPriceRange(resultList))
+  },[resultList])
+
+
 
   //Sorting by low/high price and name
 
@@ -65,21 +78,21 @@ const ProductMain = ({ productsList, isProductLoading }) => {
 
   //Find min and max from API
 
-  // const getPriceRange = (list) => {
-  //   let max = list[0]?.price || 9999;
-  //   let min = list[0]?.price || 0;
+  const getPriceRange = (list) => {
+    let max = list[0]?.price || 9999;
+    let min = list[0]?.price || 0;
 
-  //   list.forEach((item) => {
-  //     if (item.price > max) {
-  //       max = item.price;
-  //     }
-  //     if (item.price < min) {
-  //       min = item.price;
-  //     }
-  //   });
+    list.forEach((item) => {
+      if (item.price > max) {
+        max = item.price;
+      }
+      if (item.price < min) {
+        min = item.price;
+      }
+    });
 
-  //   return { max, min };
-  // };
+    return { max, min };
+  };
 
   //Search
 
@@ -98,12 +111,18 @@ const ProductMain = ({ productsList, isProductLoading }) => {
     return list.filter((item) => item.price <= maxSelectedPrice && item.price >= minSelectedPrice);
   };
 
+  //Clear filters and sorts
+
+  const handleClearValues = () => {
+    setSort(null);
+    setFilter(null);
+    setSearchValue('');
+    setCategoryValue('');
+    setMaxSelectedPrice(9999);
+    setMinSelectedPrice(0);
+  };
+
   //Sorted and filtered data from API
-
-  const resultList = handleCategoryList(handleFilterPrice(handleSort(handleFilter(handleSearch(productsList)))));
-
-
-  // const priceRange = getPriceRange(resultList);
 
   return (
     <div className="product_catalog_container">
@@ -115,13 +134,19 @@ const ProductMain = ({ productsList, isProductLoading }) => {
       ) : (
         <div className="catalog_block">
           <FiltersBlock
+            sort={sort}
             setSort={setSort}
             categoryValue={categoryValue}
             setCategoryValue={setCategoryValue}
+            searchValue={searchValue}
             setSearchValue={setSearchValue}
             resultList={resultList}
             setMaxSelectedPrice={setMaxSelectedPrice}
             setMinSelectedPrice={setMinSelectedPrice}
+            maxSelectedPrice={maxSelectedPrice}
+            minSelectedPrice={minSelectedPrice}
+            handleClearValues={handleClearValues}
+            priceRange={priceRange}
           />
           <div className="catalog_list">
             <CatalogList products={resultList} />
