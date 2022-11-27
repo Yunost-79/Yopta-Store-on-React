@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './style.scss';
 
-import PreviewMain from '../../components/PreviewMain';
-import ProductMain from '../../components/ProductMain';
+import PreviewMain from '../HomePage/PreviewMain';
+import ProductMain from '../HomePage/ProductMain';
 import { fetchData } from '../../API/ProductService';
 
 const HomePage = () => {

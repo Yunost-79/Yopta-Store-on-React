@@ -2,7 +2,7 @@ import React from 'react'
 
 import './style.scss'
 
-import PreviewImage from '../../images/preview-image.png';
+import PreviewImage from '../../../images/preview-image.png';
 
 
 const PreviewMain = () => {
