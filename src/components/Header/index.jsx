@@ -14,22 +14,24 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="header_logo">
-        <Link to="/" className="logo_link">
-          <img src={LogoImg} alt="" />
-          <h1>Yopta Store</h1>
-        </Link>
-      </div>
-      <div className="header_links">
-        <ul>
-          {data.map(({ to, label }) => (
-            <li key={label}>
-              <Link to={to} className={`link ${to === location.pathname ? 'active' : ''}`}>
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div className="header_wrapper">
+        <div className="header_logo">
+          <Link to="/" className="logo_link">
+            <img src={LogoImg} alt="" />
+            <h1>Yopta Store</h1>
+          </Link>
+        </div>
+        <div className="header_links">
+          <ul>
+            {data.map(({ to, label }) => (
+              <li key={label}>
+                <Link to={to} className={`link ${to === location.pathname ? 'active' : ''}`}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import CommonButton from '../../../components/UI/CommonButton';
+import CommonButton from '../../../../components/UI/CommonButton';
 
 import './style.scss';
 

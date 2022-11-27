@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { useEffect } from 'react';
 
-import CommonButton from '../../../components/UI/CommonButton';
+import CommonButton from '../../../../components/UI/CommonButton';
 
 import './style.scss';
 

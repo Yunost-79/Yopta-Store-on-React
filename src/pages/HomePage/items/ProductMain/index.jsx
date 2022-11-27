@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import './style.scss';
-import Loader from '../../../components/UI/Loader';
+
+import Loader from '../../../../components/UI/Loader';
 import CatalogList from '../CatalogList';
 import FiltersBlock from '../FiltersBlock';
 
