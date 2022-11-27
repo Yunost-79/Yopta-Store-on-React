@@ -1,4 +1,12 @@
-.about_container{
+
+@import "../../variables/variablesStyle.scss";
+.about_wrapper {
   margin-top: 60px;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
+  & .about_container {
+    background-color: $mainViolet;
+    & .about_swiper{
+      max-height: calc(100vh - 60px) ;
+    }
+  }
 }
