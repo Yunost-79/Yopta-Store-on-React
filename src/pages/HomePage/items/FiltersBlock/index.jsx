@@ -170,7 +170,7 @@ const FiltersBlock = ({
         />
       </div>
 
-      <CommonButton onClick={handleClearValues}>Clear all</CommonButton>
+      <CommonButton className='filter_button' onClick={handleClearValues}>Clear all</CommonButton>
     </div>
   );
 };

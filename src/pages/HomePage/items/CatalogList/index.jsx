@@ -17,7 +17,7 @@ const CatalogList = ({ products }) => {
             <h3 className="product_title">{elem.title}</h3>
             <span className="product_price">{elem.price} &#x20AC;</span>
             <span className="product_category">{elem.category.name}</span>
-            <CommonButton onClick={() => navigate(`/product/${elem.id}`)}>Open Details</CommonButton>
+            <CommonButton className='product_button' onClick={() => navigate(`/product/${elem.id}`)}>Open Details</CommonButton>
           </div>
         </div>
       ))}

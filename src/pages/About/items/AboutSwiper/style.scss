@@ -4,7 +4,7 @@
   display: flex;
   align-items: flex-start;
   height: 100%;
-  padding: 100px 100px;
+  padding: 100px 85px;
 
   & .swiper-wrapper {
     display: flex;
@@ -16,7 +16,7 @@
       justify-content: space-evenly;
       gap: 30px;
 
-      & .slide_title {
+      & .about_slide_title {
         flex: 1 1 55%;
         max-width: 650px;
         color: #fff;
@@ -33,7 +33,7 @@
         }
       }
 
-      & .slide_image {
+      & .about_slide_image {
         flex: 1 1 45%;
 
         width: 100%;
