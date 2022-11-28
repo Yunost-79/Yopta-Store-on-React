@@ -1,12 +1,18 @@
-
-@import "../../variables/variablesStyle.scss";
+@import '../../variables/variablesStyle.scss';
 .about_wrapper {
   margin-top: 60px;
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 120px);
+  background-color: $mainViolet;
+
+
+
   & .about_container {
-    background-color: $mainViolet;
-    & .about_swiper{
-      max-height: calc(100vh - 60px) ;
-    }
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+
+
   }
 }
