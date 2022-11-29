@@ -1,17 +1,14 @@
 @import '../../../variables/variablesStyle.scss';
 
-
-
 .MuiButtonBase-root.MuiButton-root.common_btn {
   color: #fff;
   background-color: rgba(250, 166, 15, 0.9);
+  text-transform: none;
   // border: 1px solid rgba(250, 166, 15, 0.8);
   transition: 0.2s all;
 
   &:hover {
     color: #fff;
     background-color: rgba(250, 166, 15, 1);
-
-
   }
 }
