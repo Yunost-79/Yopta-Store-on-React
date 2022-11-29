@@ -1,19 +1,17 @@
 @import '../../../variables/variablesStyle.scss';
 
-.common_btn{
-  border: none;
-  background-color: $yellow;
-  padding: 10px 20px;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  opacity: 1;
-  transition: 0.2s linear;
 
-  &:hover, &:active{
-    opacity: 0.85;
-    color: #000;
+
+.MuiButtonBase-root.MuiButton-root.common_btn {
+  color: #fff;
+  background-color: rgba(250, 166, 15, 0.9);
+  // border: 1px solid rgba(250, 166, 15, 0.8);
+  transition: 0.2s all;
+
+  &:hover {
+    color: #fff;
+    background-color: rgba(250, 166, 15, 1);
+
 
   }
-
 }

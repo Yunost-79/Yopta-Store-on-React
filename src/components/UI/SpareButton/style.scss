@@ -1,0 +1,15 @@
+@import '../../../variables/variablesStyle.scss';
+
+.MuiButtonBase-root.MuiButton-root.spare_btn {
+  color: rgba(250, 166, 15, 0.8);
+  border: 3px solid rgba(250, 166, 15, 0.8);
+  transition: 0.2s all;
+
+  &:hover {
+    color: rgba(250, 166, 15, 1);
+    border: 3px solid rgba(250, 166, 15, 1);
+    -webkit-box-shadow: 0px 0px 21px -8px rgba(250,166,15,1);
+    -moz-box-shadow: 0px 0px 21px -8px rgba(250,166,15,1);
+    box-shadow: 0px 0px 21px -8px rgba(250,166,15,1);
+  }
+}

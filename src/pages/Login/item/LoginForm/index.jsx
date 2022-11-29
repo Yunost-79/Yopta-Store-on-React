@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { FormControl, TextField } from '@mui/material';
-import CommonButton from '../../../../components/UI/CommonButton';
 
 import './style.scss';
+import SpareButton from '../../../../components/UI/SpareButton';
 
 const LoginBlockForm = () => {
   return (
@@ -33,8 +33,8 @@ const LoginBlockForm = () => {
           variant="standard"
         />
         <div className="form_buttons">
-          <CommonButton className="button_item">Login</CommonButton>
-          <CommonButton className="button_item">Registration</CommonButton>
+          <SpareButton className="button_item">Login</SpareButton>
+          <SpareButton className="button_item">Registration</SpareButton>
         </div>
       </FormControl>
     </form>
