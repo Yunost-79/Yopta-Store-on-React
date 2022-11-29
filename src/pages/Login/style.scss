@@ -15,25 +15,37 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    gap: 30px;
+    gap: 20px;
 
-    & .login_block_swiper {
-      flex: 1 1 60%;
-      width: 100%;
+    & .login_block_info {
+      flex: 0 0 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-width: 600px;
+      color: #fff;
 
-      & .login_swiper {
-        & .swiper-slide {
-          & .login_slide_image {
-            width: 100%;
-            max-width: 512px;
-            height: 100%;
-            max-height: 512px;
-            object-fit: contain;
-          }
-        }
+      & .info_title{
+        font-size: 25px;
+        max-width: 300px;
+        text-align: center;
+      }
+
+      & .info_image{
+        width: 100%;
+        max-width: 450px;
+        height: 100%;
+        object-fit: cover;
       }
     }
 
-   
+    .login_block_form {
+      flex: 1 1 40%;
+      max-width: 550px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 45px 45px;
+    }
   }
 }

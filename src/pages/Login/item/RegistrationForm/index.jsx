@@ -8,7 +8,6 @@ import FormLink from '../../../../components/UI/FormLink';
 
 const RegistrationBlockForm = ({ handleFormRenderLogin }) => {
   return (
-    <form className="login_block_form">
       <FormControl className="form_wrapper">
         <h3 className="form_title">Sign up</h3>
         <TextField
@@ -42,7 +41,6 @@ const RegistrationBlockForm = ({ handleFormRenderLogin }) => {
           <FormLink className='link_item' onClick={(e) => handleFormRenderLogin()}>Login</FormLink>
         </div>
       </FormControl>
-    </form>
   );
 };
 
