@@ -15,8 +15,8 @@ export const HEADER_LINKS_ITEMS = [
     // exact: false,
   },
   {
-    to: '/login',
-    label: 'Log in',
+    to: '/auth',
+    label: 'Login',
     // exact: false,
   },
 ];

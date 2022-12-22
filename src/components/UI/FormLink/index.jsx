@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 
 const FormLink = (props) => {
-  const { children, className, ...restProps } = props;
-  return <Link className={`form_link ${className ? className : ''}`} {...restProps}>{children}</Link>;
+  const { children, className, path, ...restProps } = props;
+  return (
+    <Link to={path} className={`form_link ${className ? className : null}`} {...restProps}>
+      {children}
+    </Link>
+  );
 };
 
 export default FormLink;

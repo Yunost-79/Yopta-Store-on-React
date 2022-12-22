@@ -2,10 +2,12 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
 import About from './pages/About';
 import Basket from './pages/Basket';
-import ProductPage from './pages/ProductPage';
-import Login from './pages/Login';
+import AuthPage from './pages/AuthPage/AuthPage';
+import AuthLogin from './pages/AuthPage/items/AuthLogin';
+import AuthSignUp from './pages/AuthPage/items/AuthSignUp';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -22,7 +24,11 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/basket" element={<Basket />} />
         <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/login" element={<Login />}/>
+
+        <Route path="/auth" element={<AuthPage />}>
+          <Route index element={<AuthLogin />} />
+          <Route path="/auth/sign-up" element={<AuthSignUp />} />
+        </Route>
       </Routes>
       <Footer />
     </div>

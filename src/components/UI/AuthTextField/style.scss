@@ -1,0 +1,43 @@
+.Mui-yopta-input {
+  &:hover {
+    & .MuiFormLabel-root {
+      color: rgba(0, 0, 0, 0.82);
+    }
+  }
+  & .MuiFormLabel-root,
+  .MuiInputBase-input {
+    margin-left: 3px;
+  }
+  & .MuiFormLabel-root.Mui-focused {
+    color: #faa60f;
+  }
+
+  & .MuiInput-root:before {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  }
+  & .MuiInput-root:after {
+    border-bottom: 2px solid #faa60f;
+  }
+}
+
+.Mui-yopta-input-error {
+  &:hover {
+    & .MuiFormLabel-root {
+      color: #ff3333;
+    }
+  }
+
+  & .MuiFormLabel-root,
+  .MuiFormLabel-root.Mui-focused,
+  .MuiInputBase-input,
+  .MuiFormHelperText-root {
+    color: #ff3333;
+  }
+
+  & .MuiInput-root {
+    &::before,
+    &::after {
+      border-color: #ff3333;
+    }
+  }
+}
