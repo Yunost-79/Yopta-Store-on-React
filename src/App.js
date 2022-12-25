@@ -14,8 +14,10 @@ import Footer from './components/Footer';
 
 import './App.scss';
 import './variables/variablesStyle.scss';
+import { useParams } from 'react-router-dom';
 
 function App() {
+  console.log(useParams());
   return (
     <div className="wrapper">
       <Header />

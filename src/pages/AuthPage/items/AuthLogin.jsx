@@ -1,12 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
+import { setUserData } from '../../../redux/actions/userActions';
 
 import AuthTextField from '../../../components/UI/AuthTextField';
 import FormLink from '../../../components/UI/FormLink';
 import SpareButton from '../../../components/UI/SpareButton';
 
-const AuthLogin = () => {
+const AuthLogin = ({ userData, setUserData }) => {
   const handleSubmit = useOutletContext();
+  
+  // setUserData()
+
+  // console.log(userData);
+
 
   return (
     <>
@@ -23,4 +30,16 @@ const AuthLogin = () => {
   );
 };
 
-export default AuthLogin;
+const mapStateToProps = (state) => {
+  return {
+    userData: state.users.userData,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUserData: (payload) => dispatch(setUserData(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthLogin);
