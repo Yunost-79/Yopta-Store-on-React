@@ -25,7 +25,7 @@ const Header = () => {
           <ul>
             {data.map(({ to, label }) => (
               <li key={label}>
-                <Link to={to} className={`link ${to === location.pathname ? 'active' : ''}`}>
+                <Link to={to} className={`link ${to === location.pathname ?  'active' : ''}`}>
                   {label}
                 </Link>
               </li>

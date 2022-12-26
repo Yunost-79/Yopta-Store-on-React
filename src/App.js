@@ -8,6 +8,7 @@ import Basket from './pages/Basket';
 import AuthPage from './pages/AuthPage/AuthPage';
 import AuthLogin from './pages/AuthPage/items/AuthLogin';
 import AuthSignUp from './pages/AuthPage/items/AuthSignUp';
+import AuthTest from './pages/AuthPage/items/AuthTest';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -30,6 +31,7 @@ function App() {
         <Route path="/auth" element={<AuthPage />}>
           <Route index element={<AuthLogin />} />
           <Route path="/auth/sign-up" element={<AuthSignUp />} />
+          <Route path="/auth/test" element={<AuthTest />} />
         </Route>
       </Routes>
       <Footer />

@@ -25,6 +25,9 @@ const AuthLogin = ({ userData, setUserData }) => {
         <FormLink to="/auth/sign-up" className="auth_link">
           or Sign up
         </FormLink>
+        <FormLink to="/auth/test" className="auth_link">
+          Test
+        </FormLink>
       </form>
     </>
   );
