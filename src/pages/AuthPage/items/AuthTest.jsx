@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import AuthTextField from '../../../components/UI/AuthTextField';
 import SpareButton from '../../../components/UI/SpareButton';
-import validate from './validate';
+import validate from './validateLogin';
 
 const renderTextField = ({ input, className, helperText, meta: { touched, error }, ...custom }) => (
   <AuthTextField
@@ -15,7 +15,6 @@ const renderTextField = ({ input, className, helperText, meta: { touched, error 
 );
 
 let AuthTest = ({ reset, formValue }) => {
-  
   const handleSubmitTest = (event) => {
     event.preventDefault();
   };
@@ -55,15 +54,5 @@ AuthTest = reduxForm({
 const mapStateToProps = (state) => ({
   formValue: state.form.AuthTest?.values,
 });
-
-// const selector = formValueSelector('AuthTest');
-// AuthTestSelector = connect((state) => {
-//   // const emailTest = selector(state, 'email')
-//   // const passwordTest = selector(state, 'password')
-//   const { emailTest, passwordTest } = selector(state, 'email', 'password');
-//   return {
-//     formAuthTest: `${emailTest || ''} ${passwordTest || ''}`,
-//   };
-// })(AuthTestSelector);
 
 export default connect(mapStateToProps)(AuthTest);

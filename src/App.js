@@ -29,7 +29,7 @@ function App() {
         <Route path="/product/:id" element={<ProductPage />} />
 
         <Route path="/auth" element={<AuthPage />}>
-          <Route index element={<AuthLogin />} />
+          <Route path='/auth/login' element={<AuthLogin />} />
           <Route path="/auth/sign-up" element={<AuthSignUp />} />
           <Route path="/auth/test" element={<AuthTest />} />
         </Route>

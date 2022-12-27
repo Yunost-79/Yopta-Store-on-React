@@ -6,9 +6,7 @@ import loginImage from '../../images/image-on-swiper-login-2.png';
 import { Outlet } from 'react-router-dom';
 
 const AuthPage = () => {
-  const handleSubmit = (event) => {
-    event.preventDefalut();
-  };
+
   return (
     <div className="login_page">
       <div className="login_container">
@@ -18,7 +16,7 @@ const AuthPage = () => {
           <img className="info_image" src={loginImage} alt="" />
         </div>
         <div className="form_block">
-          <Outlet context={handleSubmit} />
+          <Outlet />
         </div>
       </div>
     </div>

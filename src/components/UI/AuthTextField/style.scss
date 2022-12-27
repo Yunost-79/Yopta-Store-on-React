@@ -9,11 +9,20 @@
     margin-left: 3px;
   }
   & .MuiFormLabel-root.Mui-focused {
-    color: #faa60f;
+    color: #faa60f !important;
   }
 
   & .MuiInput-root:before {
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  }
+  & .MuiInput-input {
+    color: rgba(0, 0, 0, 0.82);
+
+    &::placeholder{
+      color: #faa60f;
+    }
+
+    
   }
   & .MuiInput-root:after {
     border-bottom: 2px solid #faa60f;
@@ -23,7 +32,7 @@
 .Mui-input-error {
   &:hover {
     & .MuiFormLabel-root {
-      color: #ff3333;
+      color: #ff3333 !important;
     }
   }
 
@@ -31,13 +40,19 @@
   .MuiFormLabel-root.Mui-focused,
   .MuiInputBase-input,
   .MuiFormHelperText-root {
-    color: #ff3333;
+    color: #ff3333 !important;
   }
 
   & .MuiInput-root {
     &::before,
     &::after {
-      border-color: #ff3333;
+      border-color: #ff3333 !important;
     }
+
+  & .MuiInput-input {
+    &::placeholder{
+      color: #ff3333 !important;
+    }
+  }
   }
 }

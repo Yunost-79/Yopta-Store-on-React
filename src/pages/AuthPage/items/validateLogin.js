@@ -13,7 +13,7 @@ export default function (values) {
     errors.email = 'Invalid email address';
   }
 
-  if (values.password && !/[0-9a-zA-Z!@#$%^&*]{6,}/g.test(values.password)) {
+  if (values.password && !/[0-9a-zA-Z'-]{6,}|[0-9а-яА-ЯёЁ'-]{6,}/g.test(values.password)) {
     errors.password = 'Password must be at least 6 characters long';
   }
 

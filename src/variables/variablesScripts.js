@@ -12,8 +12,12 @@ export const HEADER_LINKS_ITEMS = [
     label: 'Basket',
   },
   {
-    to: '/auth',
+    to: '/auth/login',
     label: 'Login',
+  },
+  {
+    to: '/auth/sign-up',
+    label: 'Sign up',
   },
 
 ];

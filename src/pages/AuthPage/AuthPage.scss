@@ -47,28 +47,80 @@
       border-radius: 15px;
       padding: 45px 45px;
 
-      & .form_auth{
+      & .form_auth {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         color: #fff;
 
-        & .auth_title{
+        & .auth_title {
           font-size: 36px;
         }
 
-        & .auth_button{
+        //Mui Styles
+
+        & .Mui-auth-input {
+          & .MuiInputLabel-root {
+            color: rgba(256, 256, 256, 0.6);
+          }
+
+          & .MuiInput-input {
+            color: rgba(256, 256, 256, 0.95);
+          }
+
+          & .MuiInput-root:before {
+            border-bottom: 2px solid rgba(256, 256, 256, 0.6);
+          }
+        }
+
+        & .show_password {
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-start;
+          margin-top: 8px;
+
+          & .show_password_icons {
+            margin-left: 8px;
+            cursor: pointer;
+            transition: 0.2s all;
+
+            &:hover {
+              color: rgba(256, 256, 256, 0.6);
+            }
+          }
+        }
+
+        & .auth_button {
           margin-top: 16px;
           width: 40%;
           font-size: 16px;
         }
 
-        & .auth_link{
-          margin-top: 16px;
+        & .auth_links {
+          display: flex;
+          justify-content: space-evenly;
+          width: 100%;
+          margin-top: 32px;
           font-size: 16px;
         }
       }
     }
   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: rgba(256, 256, 256, 0.95);
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+  transition: background-color 5000s ease-in-out 0.3s;
 }
