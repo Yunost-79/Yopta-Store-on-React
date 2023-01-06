@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setUserLoginData } from '../../../redux/actions/userActions';
-import { Field, reduxForm } from 'redux-form';
+import { Field, Form, reduxForm } from 'redux-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { getTokenData, saveToken } from '../../../helpers/tokenHelper';
 
 import validate from './validateLogin';
 
 import AuthTextField from '../../../components/UI/AuthTextField';
 import FormLink from '../../../components/UI/FormLink';
 import SpareButton from '../../../components/UI/SpareButton';
+import axios from 'axios';
 
 const renderAuthField = ({ input, className, helperText, meta: { touched, error }, ...custom }) => (
   <AuthTextField
@@ -19,15 +21,41 @@ const renderAuthField = ({ input, className, helperText, meta: { touched, error 
     {...custom}
   />
 );
-
 let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin }) => {
   const [changeIconPassword, setChangeIconPassword] = useState(false);
 
-  //Function to submit login form
-  const handleSubmitLogin = (event) => {
-    event.preventDefault();
-    setUserLoginData(formValueLogin);
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const postLoginData = await axios({
+        url: 'https://fakestoreapi.com/auth/login',
+        method: 'POST',
+        data: {
+          username: 'mor_2314',
+          password: '83r5^_',
+        },
+      });
+      console.log(postLoginData);
+      console.log(postLoginData.data.token);
+      saveToken(postLoginData.data.token);
+      const getUserData = await axios({
+        url: `https://fakestoreapi.com/users/${getTokenData().sub}`,
+        method: 'GET',
+      });
+      setUserLoginData(getUserData)
+    } catch (error) {
+      console.log(error);
+    }
+
+    // .then((res) => {
+    //   console.log(res);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
   };
+
+  //Function to submit login form
 
   console.log('userLogindData:', userLoginData);
 
@@ -41,9 +69,10 @@ let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin }) => 
 
   return (
     <>
-      <form className="form_auth" onSubmit={handleSubmitLogin}>
+      <Form className="form_auth" onSubmit={handleOnSubmit}>
         <h3 className="auth_title">Login</h3>
-        <Field component={renderAuthField} label="E-mail" placeholder="Enter your E-mail..." name="email" required autoFocus />
+        <Field component={renderAuthField} label="Username" placeholder="Enter your username..." name="username" required autoFocus />
+        {/* <Field component={renderAuthField} label="E-mail" placeholder="Enter your E-mail..." name="email" required  /> */}
         <Field
           component={renderAuthField}
           label="Password"
@@ -75,7 +104,7 @@ let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin }) => 
             Clear fields
           </FormLink>
         </div>
-      </form>
+      </Form>
     </>
   );
 };

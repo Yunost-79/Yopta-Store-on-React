@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { HEADER_LINKS_ITEMS } from '../../variables/variablesScripts';
+import { HEADER_AUTH_LINKS_ITEMS, HEADER_DEFAULT_LINKS_ITEMS } from '../../variables/variablesScripts';
+import { isTokenValid } from '../../helpers/tokenHelper';
 
 import LogoImg from '../../images/Logo.svg';
 
 import './style.scss';
 
-const data = HEADER_LINKS_ITEMS;
-
 const Header = () => {
   const location = useLocation();
+
+
+
+  const getLinks = () => {
+    console.log(isTokenValid());
+    if (isTokenValid()) {
+      return HEADER_AUTH_LINKS_ITEMS;
+    }
+    return HEADER_DEFAULT_LINKS_ITEMS;
+  };
 
   return (
     <header className="header">
@@ -23,9 +32,9 @@ const Header = () => {
         </div>
         <div className="header_links">
           <ul>
-            {data.map(({ to, label }) => (
+            {getLinks().map(({ to, label }) => (
               <li key={label}>
-                <Link to={to} className={`link ${to === location.pathname ?  'active' : ''}`}>
+                <Link to={to} className={`link ${to === location.pathname ? 'active' : ''}`}>
                   {label}
                 </Link>
               </li>

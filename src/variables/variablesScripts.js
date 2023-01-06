@@ -1,4 +1,24 @@
-export const HEADER_LINKS_ITEMS = [
+export const HEADER_DEFAULT_LINKS_ITEMS = [
+  {
+    to: '/',
+    label: 'Home',
+  },
+  {
+    to: '/about',
+    label: 'About',
+  },
+
+  {
+    to: '/auth/login',
+    label: 'Login',
+  },
+  {
+    to: '/auth/sign-up',
+    label: 'Sign up',
+  },
+];
+
+export const HEADER_AUTH_LINKS_ITEMS = [
   {
     to: '/',
     label: 'Home',
@@ -19,5 +39,4 @@ export const HEADER_LINKS_ITEMS = [
     to: '/auth/sign-up',
     label: 'Sign up',
   },
-
 ];
