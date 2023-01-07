@@ -1,4 +1,4 @@
-import { removeToken } from "../helpers/tokenHelper";
+import { logoutUser } from "../helpers/tokenHelper";
 
 export const urlAPI = 'https://fakestoreapi.com';
 
@@ -37,7 +37,8 @@ export const HEADER_AUTH_LINKS_ITEMS = [
   },
   {
     to: '/auth/login',
-    func: () => removeToken(),
+    // func: () => logoutUser(),
+    isActions: true,
     label: 'Sign out',
   },
 ];

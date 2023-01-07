@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode';
+import { logoutUser as logoutUserAction } from '../redux/actions/userActions';
 
 const getTokenData = () => jwt_decode(loadToken());
 
@@ -12,6 +13,9 @@ const isTokenValid = () => {
   return !!loadToken();
 };
 
-const removeToken = () => localStorage.removeItem('access_token');
+// const logoutUser = () => {
+//   localStorage.removeItem('access_token')
+//   logoutUserAction()
+// };
 
-export { saveToken, isTokenValid, loadToken, removeToken, getTokenData };
+export { saveToken, isTokenValid, loadToken, getTokenData };

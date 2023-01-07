@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setUserLoginData } from '../../../redux/actions/userActions';
+import { setUserLoginData, loginUser } from '../../../redux/actions/userActions';
 import { Field, Form, reduxForm } from 'redux-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -23,7 +23,7 @@ const renderAuthField = ({ input, className, helperText, meta: { touched, error 
     {...custom}
   />
 );
-let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin }) => {
+let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin, loginUserAction }) => {
   const [changeIconPassword, setChangeIconPassword] = useState(false);
 
   const handleOnSubmit = async (e) => {
@@ -32,11 +32,12 @@ let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin }) => 
       const postData = await postLoginData(formValueLogin.username, formValueLogin.password);
       const loginToken = postData.data.token;
       saveToken(loginToken);
-
       const getData = await getLoginUserData(getTokenData().sub);
       setUserLoginData(getData);
+      loginUserAction(getData)
     } catch (error) {
       console.log(error);
+      loginUserAction(error.response.status || error)
     }
   };
 
@@ -102,6 +103,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     setUserLoginData: (payload) => dispatch(setUserLoginData(payload)),
+    loginUserAction: payload => dispatch(loginUser(payload))
   };
 };
 
