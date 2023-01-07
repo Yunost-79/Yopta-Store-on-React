@@ -6,13 +6,12 @@ const saveToken = (token) => localStorage.setItem('access_token', token);
 
 const loadToken = () => localStorage.getItem('access_token');
 
+
 const isTokenValid = () => {
+  // console.log("WTF", !!loadToken());
   return !!loadToken();
 };
 
-const removeToken = () => {
-  localStorage.removeItem('access_token');
-};
+const removeToken = () => localStorage.removeItem('access_token');
 
-
-export { saveToken, isTokenValid, removeToken, getTokenData };
+export { saveToken, isTokenValid, loadToken, removeToken, getTokenData };

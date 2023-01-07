@@ -12,6 +12,8 @@ import AuthTextField from '../../../components/UI/AuthTextField';
 import FormLink from '../../../components/UI/FormLink';
 import SpareButton from '../../../components/UI/SpareButton';
 import axios from 'axios';
+import { postLoginData } from '../../../API/postUserLogin';
+import { getLoginUserData } from '../../../API/getUserData';
 
 const renderAuthField = ({ input, className, helperText, meta: { touched, error }, ...custom }) => (
   <AuthTextField
@@ -27,37 +29,18 @@ let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin }) => 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const postLoginData = await axios({
-        url: 'https://fakestoreapi.com/auth/login',
-        method: 'POST',
-        data: {
-          username: 'mor_2314',
-          password: '83r5^_',
-        },
-      });
-      console.log(postLoginData);
-      console.log(postLoginData.data.token);
-      saveToken(postLoginData.data.token);
-      const getUserData = await axios({
-        url: `https://fakestoreapi.com/users/${getTokenData().sub}`,
-        method: 'GET',
-      });
-      setUserLoginData(getUserData)
+      const postData = await postLoginData(formValueLogin.username, formValueLogin.password);
+      const loginToken = postData.data.token;
+      saveToken(loginToken);
+
+      const getData = await getLoginUserData(getTokenData().sub);
+      setUserLoginData(getData);
     } catch (error) {
       console.log(error);
     }
-
-    // .then((res) => {
-    //   console.log(res);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
   };
 
   //Function to submit login form
-
-  console.log('userLogindData:', userLoginData);
 
   const handleShowPasswords = () => {
     setChangeIconPassword(true);

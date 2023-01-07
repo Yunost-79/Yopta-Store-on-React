@@ -16,18 +16,17 @@ import './App.scss';
 import './variables/variablesStyle.scss';
 
 function App() {
-  const userToken = localStorage.getItem('access_token');
 
-  useEffect(() => {
-    
-  }, []);
+  // useEffect(() => {
 
-  const getLinks = () => {
-    if (isTokenValid()) {
-      return HEADER_AUTH_LINKS_ITEMS;
-    }
-    return HEADER_DEFAULT_LINKS_ITEMS;
-  };
+  // }, []);
+
+  // const getLinks = () => {
+  //   if (isTokenValid()) {
+  //     return HEADER_AUTH_LINKS_ITEMS;
+  //   }
+  //   return HEADER_DEFAULT_LINKS_ITEMS;
+  // };
 
   return (
     <div className="wrapper">

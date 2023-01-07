@@ -1,3 +1,7 @@
+import { removeToken } from "../helpers/tokenHelper";
+
+export const urlAPI = 'https://fakestoreapi.com';
+
 export const HEADER_DEFAULT_LINKS_ITEMS = [
   {
     to: '/',
@@ -33,10 +37,7 @@ export const HEADER_AUTH_LINKS_ITEMS = [
   },
   {
     to: '/auth/login',
-    label: 'Login',
-  },
-  {
-    to: '/auth/sign-up',
-    label: 'Sign up',
+    func: () => removeToken(),
+    label: 'Sign out',
   },
 ];

@@ -1,10 +1,7 @@
 import axios from 'axios';
-
-const urlAPI = 'https://fakestoreapi.com';
+import { urlAPI } from '../variables/variablesScripts';
 
 export const fetchData = async (url) => {
   const result = await axios(urlAPI + url);
   return result;
 };
-
-

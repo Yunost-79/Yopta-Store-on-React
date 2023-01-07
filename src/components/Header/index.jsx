@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { HEADER_AUTH_LINKS_ITEMS, HEADER_DEFAULT_LINKS_ITEMS } from '../../variables/variablesScripts';
-import { isTokenValid } from '../../helpers/tokenHelper';
+import { getTokenData, isTokenValid, loadToken, saveToken } from '../../helpers/tokenHelper';
 
 import LogoImg from '../../images/Logo.svg';
 
@@ -10,12 +10,27 @@ import './style.scss';
 
 const Header = () => {
   const location = useLocation();
+  const isAuth = () => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      return true;
+    }
+    return false;
+  };
 
+  console.log(isAuth());
 
+  useEffect(() => {
+    getLinks();
+    isAuth();
+  }, []);
 
   const getLinks = () => {
-    console.log(isTokenValid());
-    if (isTokenValid()) {
+    // console.log('isTokenValid', isTokenValid());
+    // console.log('saveToken', saveToken());
+    // console.log('loadToken', loadToken());
+
+    if (isAuth()) {
       return HEADER_AUTH_LINKS_ITEMS;
     }
     return HEADER_DEFAULT_LINKS_ITEMS;
@@ -32,9 +47,9 @@ const Header = () => {
         </div>
         <div className="header_links">
           <ul>
-            {getLinks().map(({ to, label }) => (
+            {getLinks().map(({ to, label, func }) => (
               <li key={label}>
-                <Link to={to} className={`link ${to === location.pathname ? 'active' : ''}`}>
+                <Link to={to} onClick={func} className={`link ${to === location.pathname ? 'active' : ''}`}>
                   {label}
                 </Link>
               </li>
