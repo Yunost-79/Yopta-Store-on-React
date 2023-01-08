@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setUserLoginData, loginUser } from '../../../redux/actions/userActions';
 import { Field, Form, reduxForm } from 'redux-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { getTokenData, saveToken } from '../../../helpers/tokenHelper';
 
+import { setUserData, loginUser } from '../../../redux/actions/userActions';
 import validate from './validateLogin';
+import { postLoginData } from '../../../API/postUserLogin';
+import { getLoginUserData } from '../../../API/getUserData';
 
 import AuthTextField from '../../../components/UI/AuthTextField';
 import FormLink from '../../../components/UI/FormLink';
 import SpareButton from '../../../components/UI/SpareButton';
-import axios from 'axios';
-import { postLoginData } from '../../../API/postUserLogin';
-import { getLoginUserData } from '../../../API/getUserData';
+import { useNavigate } from 'react-router-dom';
 
-const renderAuthField = ({ input, className, helperText, meta: { touched, error }, ...custom }) => (
+const renderAuthField = ({ input, className, helperText, defaultValue, meta: { touched, error }, ...custom }) => (
   <AuthTextField
     className={` Mui-auth-input ${className} ${touched && error ? 'Mui-input-error' : ''}`}
+    defaultValue={defaultValue}
     helperText={touched && error}
     {...input}
     {...custom}
   />
 );
-let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin, loginUserAction }) => {
+let AuthLogin = ({ reset, userData, setUserData, formValueLogin, loginUserAction }) => {
+  const navigate = useNavigate();
   const [changeIconPassword, setChangeIconPassword] = useState(false);
 
   const handleOnSubmit = async (e) => {
@@ -32,16 +34,24 @@ let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin, login
       const postData = await postLoginData(formValueLogin.username, formValueLogin.password);
       const loginToken = postData.data.token;
       saveToken(loginToken);
+      localStorage.setItem(
+        'user_data',
+        JSON.stringify({
+          isAuth: true,
+        })
+      );
+
       const getData = await getLoginUserData(getTokenData().sub);
-      setUserLoginData(getData);
-      loginUserAction(getData)
+      setUserData(getData);
+      loginUserAction(getData);
+      navigate('/');
     } catch (error) {
-      console.log(error);
-      loginUserAction(error.response.status || error)
+      // console.log(error);
+      loginUserAction(error.response.status || error);
     }
   };
 
-  //Function to submit login form
+  //Function to change hide/show icons
 
   const handleShowPasswords = () => {
     setChangeIconPassword(true);
@@ -56,7 +66,6 @@ let AuthLogin = ({ reset, userLoginData, setUserLoginData, formValueLogin, login
       <Form className="form_auth" onSubmit={handleOnSubmit}>
         <h3 className="auth_title">Login</h3>
         <Field component={renderAuthField} label="Username" placeholder="Enter your username..." name="username" required autoFocus />
-        {/* <Field component={renderAuthField} label="E-mail" placeholder="Enter your E-mail..." name="email" required  /> */}
         <Field
           component={renderAuthField}
           label="Password"
@@ -97,13 +106,13 @@ AuthLogin = reduxForm({ form: 'AuthLogin', validate })(AuthLogin);
 
 const mapStateToProps = (state) => ({
   formValueLogin: state.form.AuthLogin?.values,
-  userLoginData: state.users.userLoginData,
+  userData: state.users.userData,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUserLoginData: (payload) => dispatch(setUserLoginData(payload)),
-    loginUserAction: payload => dispatch(loginUser(payload))
+    setUserData: (payload) => dispatch(setUserData(payload)),
+    loginUserAction: (payload) => dispatch(loginUser(payload)),
   };
 };
 

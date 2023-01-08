@@ -1,4 +1,3 @@
-import { logoutUser } from "../helpers/tokenHelper";
 
 export const urlAPI = 'https://fakestoreapi.com';
 
@@ -34,6 +33,10 @@ export const HEADER_AUTH_LINKS_ITEMS = [
   {
     to: '/basket',
     label: 'Basket',
+  },
+  {
+    to:'/profile',
+    label: "My Profile",
   },
   {
     to: '/auth/login',
