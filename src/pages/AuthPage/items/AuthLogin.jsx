@@ -14,6 +14,7 @@ import AuthTextField from '../../../components/UI/AuthTextField';
 import FormLink from '../../../components/UI/FormLink';
 import SpareButton from '../../../components/UI/SpareButton';
 import { useNavigate } from 'react-router-dom';
+import { getRandomGeolocation } from '../../../API/getRandomGeo';
 
 const renderAuthField = ({ input, className, helperText, defaultValue, meta: { touched, error }, ...custom }) => (
   <AuthTextField
@@ -34,16 +35,25 @@ let AuthLogin = ({ reset, userData, setUserData, formValueLogin, loginUserAction
       const postData = await postLoginData(formValueLogin.username, formValueLogin.password);
       const loginToken = postData.data.token;
       saveToken(loginToken);
+
+      const getData = await getLoginUserData(getTokenData().sub);
+      const userData = getData.data;
+
+      const geoData = await getRandomGeolocation();
+      // console.log('AuthgeoData', geoData);
+
       localStorage.setItem(
         'user_data',
         JSON.stringify({
           isAuth: true,
+          profileUserData: userData,
+          userGeoData: geoData,
         })
       );
+      console.log('AUTHPAGE setUserData', setUserData);
 
-      const getData = await getLoginUserData(getTokenData().sub);
-      setUserData(getData);
-      loginUserAction(getData);
+      setUserData(userData);
+      loginUserAction(userData);
       navigate('/');
     } catch (error) {
       // console.log(error);
@@ -106,7 +116,7 @@ AuthLogin = reduxForm({ form: 'AuthLogin', validate })(AuthLogin);
 
 const mapStateToProps = (state) => ({
   formValueLogin: state.form.AuthLogin?.values,
-  userData: state.users.userData,
+  userData: state,
 });
 
 const mapDispatchToProps = (dispatch) => {

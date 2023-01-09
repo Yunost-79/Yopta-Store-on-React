@@ -12,6 +12,4 @@ const isTokenValid = () => {
 
 const removeToken = () => localStorage.removeItem('access_token');
 
-const clearLocalStore = () => localStorage.clear();
-
-export { saveToken, isTokenValid, loadToken, getTokenData, removeToken, clearLocalStore };
+export { saveToken, isTokenValid, loadToken, getTokenData, removeToken };

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/actions/userActions';
-import { clearLocalStore, removeToken } from '../../helpers/tokenHelper';
+import {  removeToken } from '../../helpers/tokenHelper';
 
 import { HEADER_AUTH_LINKS_ITEMS, HEADER_DEFAULT_LINKS_ITEMS } from '../../variables/variablesScripts';
 
@@ -13,23 +13,26 @@ import './style.scss';
 const Header = ({ isAuthenticated, logoutUserAction }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const clearLocalStore = () => localStorage.clear();
+
 
   useEffect(() => {
     getLinks();
   }, [isAuthenticated]);
 
-  const getLinks = (isAuth) => {
+  const getLinks = () => {
     if (isAuthenticated) {
       return HEADER_AUTH_LINKS_ITEMS;
     }
     return HEADER_DEFAULT_LINKS_ITEMS;
   };
 
+
   const handleLogout = (e) => {
     e.preventDefault();
     removeToken();
     logoutUserAction();
-    clearLocalStore()
+    clearLocalStore();
     navigate('/');
   };
 
