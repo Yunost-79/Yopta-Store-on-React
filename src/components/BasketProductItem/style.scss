@@ -1,0 +1,78 @@
+@import '../../variables/variablesStyle.scss';
+
+.left_product_item {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  & .product_left_block {
+    display: flex;
+    align-items: flex-start;
+    flex: 0 0 70%;
+
+    & .product_checkbox_block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto 10px;
+
+      & .product_checkbox {
+        padding: 0;
+        height: 100%;
+      }
+    }
+
+    & .product_left_image {
+      & img {
+        width: 150px;
+        object-fit: cover;
+        height: auto;
+      }
+    }
+
+    & .product_left_description {
+      margin: 0 15px;
+      font-size: 14px;
+
+      & .item_title {
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+  }
+
+  & .product_left_amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex: 0 0 15%;
+
+    & .MuiButtonGroup-root {
+      width: 100%;
+      max-width: 100px;
+      min-width: 60px;
+      & .MuiButtonBase-root {
+        min-width: 25px;
+        background-color: $yellow;
+        padding: 0;
+        border-color: rgba(0, 0, 0, 0);
+        // border-right: 0;
+      }
+      & .MuiInputBase-input.MuiOutlinedInput-input {
+        padding: 3px;
+        text-align: center;
+      }
+
+      & .MuiInputBase-root.MuiOutlinedInput-root {
+        border-radius: 0;
+      }
+    }
+  }
+  & .product_left_price {
+    flex: 0 0 15%;
+    text-align: center;
+    width: 100%;
+  }
+}

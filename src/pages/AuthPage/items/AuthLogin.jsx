@@ -50,7 +50,6 @@ let AuthLogin = ({ reset, userData, setUserData, formValueLogin, loginUserAction
           userGeoData: geoData,
         })
       );
-      console.log('AUTHPAGE setUserData', setUserData);
 
       setUserData(userData);
       loginUserAction(userData);

@@ -17,15 +17,18 @@ const MyProfile = ({ userProfileData }) => {
 
   const randomAvatarImg = 'https://source.boringavatars.com/beam';
 
-  const userData = JSON.parse(localStorage.getItem('user_data'));
+  const userData =  JSON.parse(localStorage.getItem('user_data'));
   const data = userData.profileUserData;
 
   useEffect(() => {
     setIsLoading(true);
     setLatitude(userData.userGeoData.lat);
     setLongitude(userData.userGeoData.lon);
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   }, []);
+
 
   const toUpperCaseFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);

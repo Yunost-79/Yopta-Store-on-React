@@ -6,7 +6,7 @@ import { userIsAuth } from './redux/actions/userActions';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import About from './pages/About';
-import Basket from './pages/Basket';
+import Basket from './pages/Basket/Basket';
 import AuthPage from './pages/AuthPage/AuthPage';
 import AuthLogin from './pages/AuthPage/items/AuthLogin';
 import AuthSignUp from './pages/AuthPage/items/AuthSignUp';
