@@ -1,13 +1,16 @@
-import { Button, ButtonGroup, Checkbox, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { setAddProductsData, setDeleteProductsData } from '../../redux/actions/productsAction';
 import { Link } from 'react-router-dom';
 import BasketProductItem from '../../components/BasketProductItem/BasketProductItem';
 import CommonButton from '../../components/UI/CommonButton';
-import img from '../../images/testImg.png';
 
 import './style.scss';
 
-const Basket = () => {
+const Basket = ({ productBasketData }) => {
+  console.log('productBasketData', productBasketData);
+
+
   return (
     <div className="basket_container">
       <h2 className="basket_title">Shopping Basket</h2>
@@ -24,27 +27,33 @@ const Basket = () => {
             </div>
           </div>
           <div className="content_left_products">
-            <BasketProductItem />
-            <BasketProductItem />
-            <BasketProductItem />
-            <BasketProductItem />
-            <BasketProductItem />
-            <BasketProductItem />
-            <BasketProductItem />
-            <BasketProductItem />
-            <BasketProductItem />
-            <BasketProductItem />
+            {productBasketData.length === 0 ? (
+              <div>Empty basket</div>
+            ) : (
+              <BasketProductItem productBasketData={productBasketData} setDeleteProductsData={setDeleteProductsData} />
+            )}
           </div>
         </div>
         <div className="basket_content_block basket_content_right">
           <span className="right_product_item right_product_title">Subtotal</span>
           <span className="right_product_item right_product_amount">Total: 1 item</span>
           <span className="right_product_item right_product_price">Total price: 228$</span>
-          <CommonButton className='right_product_item' >Checkout</CommonButton>
+          <CommonButton className="right_product_item">Checkout</CommonButton>
         </div>
       </div>
     </div>
   );
 };
 
-export default Basket;
+const mapStateToProps = (state) => ({
+  productBasketData: state.products.productBasketData,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAddProductsData: (payload) => dispatch(setAddProductsData(payload)),
+    setDeleteProductsData: (payload) => dispatch(setDeleteProductsData(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket);

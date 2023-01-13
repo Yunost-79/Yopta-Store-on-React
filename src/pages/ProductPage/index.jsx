@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchData } from '../../API/ProductService';
+import { connect } from 'react-redux';
+
+import { setAddProductsData, setDeleteProductsData } from '../../redux/actions/productsAction';
 
 import CommonButton from '../../components/UI/CommonButton';
 import BackButton from '../../components/UI/BackButton';
@@ -9,7 +12,7 @@ import Star from '../../images/star.svg';
 
 import './style.scss';
 
-const ProductPage = () => {
+const ProductPage = ({ setAddProductsData, setDeleteProductsData }) => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const navigate = useNavigate();
@@ -25,6 +28,11 @@ const ProductPage = () => {
     }
   };
 
+  //Redux basket
+
+  const handleAddTobasket = () => {
+    setAddProductsData(productData);
+  };
 
   return (
     <div className="product_page">
@@ -56,7 +64,9 @@ const ProductPage = () => {
             </div>
             <div className="buttons">
               <CommonButton className="product_btn">Buy Now</CommonButton>
-              <CommonButton className="product_btn">Add in basket</CommonButton>
+              <CommonButton onClick={handleAddTobasket} className="product_btn">
+                Add in basket
+              </CommonButton>
             </div>
             <div className="subtitle_item">
               <span>In Stock:</span>
@@ -64,10 +74,22 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
-        <BackButton text="Come Back" onClick={()=>{navigate('/')}}></BackButton>
+        <BackButton
+          text="Come Back"
+          onClick={() => {
+            navigate('/');
+          }}
+        ></BackButton>
       </div>
     </div>
   );
 };
 
-export default ProductPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAddProductsData: (payload) => dispatch(setAddProductsData(payload)),
+    setDeleteProductsData: (payload) => dispatch(setDeleteProductsData(payload)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ProductPage);

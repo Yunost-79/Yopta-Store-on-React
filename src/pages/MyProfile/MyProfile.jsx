@@ -26,7 +26,7 @@ const MyProfile = ({ userProfileData }) => {
     setLongitude(userData.userGeoData.lon);
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 700);
   }, []);
 
 
