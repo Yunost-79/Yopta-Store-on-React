@@ -13,7 +13,7 @@ const LongText = ({ content, limit, className }) => {
   const handleChangeText = () => setShowAll(!showAll);
 
   if (content.length <= limit) {
-    return <div>{content}</div>;
+    return <div className={className ? className : ''}>{content}</div>;
   }
   if (showAll) {
     return (
@@ -59,7 +59,9 @@ const BasketProductItem = ({ productBasketData, setDeleteProductsData }) => {
               </ButtonGroup>
             </div>
             <div className="product_left_price">{`${data.price} €`}</div>
-            <CloseIcon />
+            <div className="product_left_remove">
+              <CloseIcon />
+            </div>
           </div>
         );
       })}

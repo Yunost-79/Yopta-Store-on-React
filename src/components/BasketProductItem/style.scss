@@ -9,7 +9,8 @@
   & .product_left_block {
     display: flex;
     align-items: flex-start;
-    flex: 0 0 70%;
+    flex: 0 0 65%;
+    width: 100%;
 
     & .product_checkbox_block {
       display: flex;
@@ -72,6 +73,12 @@
   }
   & .product_left_price {
     flex: 0 0 15%;
+    text-align: center;
+    width: 100%;
+  }
+
+  & .product_left_remove {
+    flex: 0 0 5%;
     text-align: center;
     width: 100%;
   }

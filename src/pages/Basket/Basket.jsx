@@ -6,7 +6,6 @@ import BasketProductItem from '../../components/BasketProductItem/BasketProductI
 import CommonButton from '../../components/UI/CommonButton';
 
 import './style.scss';
-import { useEffect } from 'react';
 
 const Basket = ({ productBasketData, setAddProductsData, setProductsBasketData, setDeleteProductsData, setDeleteProductsDataAll }) => {
   const handleDeleteItem = () => {
@@ -30,6 +29,7 @@ const Basket = ({ productBasketData, setAddProductsData, setProductsBasketData, 
               <span className="left_teblehead_item tablehead_span tablehead_description">Description</span>
               <span className="left_teblehead_item tablehead_item tablehead_span">Amount</span>
               <span className="left_teblehead_item tablehead_item tablehead_span">Price</span>
+              <span className="left_teblehead_item tablehead_item tablehead_span_remove "></span>
             </div>
           </div>
           <div className="content_left_products">
