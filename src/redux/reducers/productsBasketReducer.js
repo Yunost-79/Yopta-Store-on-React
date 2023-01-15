@@ -1,4 +1,4 @@
-const initialState = { productBasketData: [] };
+const initialState = { productBasketData: [], basketCounter: 0 };
 
 export const productsBasketReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,6 +14,9 @@ export const productsBasketReducer = (state = initialState, action) => {
 
     case 'DELETE_PRODUCTS_BASKET_DATA_ALL':
       return { ...state, productBasketData: [] };
+
+    case 'COUNT_PRODUCTS_BASKET_DATA':
+      return { ...state, basketCounter: action.payload };
 
     // case 'TOGGLE_PRODUCT_DATA':
     //   const toggleItem = state.productBasketData.find((item) => item.id === action.payload.id);

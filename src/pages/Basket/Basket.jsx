@@ -7,11 +7,13 @@ import CommonButton from '../../components/UI/CommonButton';
 
 import './style.scss';
 
-const Basket = ({ productBasketData, setAddProductsData, setProductsBasketData, setDeleteProductsData, setDeleteProductsDataAll }) => {
+const Basket = ({ productBasketData, basketCounter, setAddProductsData, setProductsBasketData, setDeleteProductsData, setDeleteProductsDataAll }) => {
   const handleDeleteItem = () => {
     setDeleteProductsDataAll();
     localStorage.removeItem('basket_data');
   };
+
+  console.log(basketCounter);
 
   return (
     <div className="basket_container">
@@ -42,7 +44,7 @@ const Basket = ({ productBasketData, setAddProductsData, setProductsBasketData, 
         </div>
         <div className="basket_content_block basket_content_right">
           <span className="right_product_item right_product_title">Subtotal</span>
-          <span className="right_product_item right_product_amount">Total: 1 item</span>
+          <span className="right_product_item right_product_amount">{`Total: ${basketCounter}`}</span>
           <span className="right_product_item right_product_price">Total price: 228$</span>
           <CommonButton className="right_product_item">Checkout</CommonButton>
         </div>
@@ -53,6 +55,7 @@ const Basket = ({ productBasketData, setAddProductsData, setProductsBasketData, 
 
 const mapStateToProps = (state) => ({
   productBasketData: state.productsBasket.productBasketData,
+  basketCounter: state.productsBasket.basketCounter,
 });
 
 const mapDispatchToProps = (dispatch) => {

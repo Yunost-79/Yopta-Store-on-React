@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userIsAuth } from './redux/actions/userActions';
-import { setProductsBasketData, setAddProductsData } from './redux/actions/productsBasketAction';
+import { setProductsBasketData, setBasketCounter } from './redux/actions/productsBasketAction';
 
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
@@ -19,8 +19,7 @@ import Footer from './components/Footer';
 import './App.scss';
 import './variables/variablesStyle.scss';
 
-function App({ userIsAuth, productBasketData, setProductsBasketData, setAddProductsData }) {
-
+function App({ userIsAuth, productBasketData, setProductsBasketData,  setBasketCounter }) {
   useEffect(() => {
     const userLocalData = JSON.parse(localStorage.getItem('user_data'));
 
@@ -34,10 +33,9 @@ function App({ userIsAuth, productBasketData, setProductsBasketData, setAddProdu
 
   useEffect(() => {
     localStorage.setItem('basket_data', JSON.stringify(productBasketData));
+    setBasketCounter(productBasketData.length);
   }, [productBasketData]);
 
-
-  
 
   return (
     <div className="wrapper">
@@ -70,7 +68,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     userIsAuth: (payload) => dispatch(userIsAuth(payload)),
     setProductsBasketData: (payload) => dispatch(setProductsBasketData(payload)),
-    setAddProductsData: (payload) => dispatch(setAddProductsData(payload)),
+    setBasketCounter: (payload) => dispatch(setBasketCounter(payload)),
   };
 };
 

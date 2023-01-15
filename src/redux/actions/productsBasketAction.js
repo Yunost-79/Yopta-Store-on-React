@@ -10,3 +10,6 @@ export const setDeleteProductsData = (payload) => {
 export const setDeleteProductsDataAll = (payload) => {
   return { type: 'DELETE_PRODUCTS_BASKET_DATA_ALL', payload: payload };
 };
+export const setBasketCounter = (payload) => {
+  return { type: 'COUNT_PRODUCTS_BASKET_DATA', payload: payload };
+};

@@ -2,19 +2,20 @@ import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/actions/userActions';
-import {  removeToken } from '../../helpers/tokenHelper';
+import { removeToken } from '../../helpers/tokenHelper';
 
 import { HEADER_AUTH_LINKS_ITEMS, HEADER_DEFAULT_LINKS_ITEMS } from '../../variables/variablesScripts';
+
+import CountCircle from '../CountCircle/CountCircle';
 
 import LogoImg from '../../images/Logo.svg';
 
 import './style.scss';
 
-const Header = ({ isAuthenticated, logoutUserAction }) => {
+const Header = ({ isAuthenticated, logoutUserAction, basketCounter }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const clearLocalStore = () => localStorage.clear();
-
 
   useEffect(() => {
     getLinks();
@@ -26,7 +27,6 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
     }
     return HEADER_DEFAULT_LINKS_ITEMS;
   };
-
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
               if (isActions) {
                 return (
                   <li key={label}>
-                    <Link to={to} onClick={handleLogout} className={`link ${to === location.pathname ? 'active' : ''}`}>
+                    <Link to={to} onClick={handleLogout} className={`link ${label} ${to === location.pathname ? 'active' : ''}`}>
                       {label}
                     </Link>
                   </li>
@@ -59,8 +59,9 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
               }
               return (
                 <li key={label}>
-                  <Link to={to} className={`link ${to === location.pathname ? 'active' : ''}`}>
+                  <Link to={to} className={`link ${label} ${to === location.pathname ? 'active' : ''}`}>
                     {label}
+                    {basketCounter !== 0 && to === '/basket' ? <CountCircle basketCounter={basketCounter} /> : null}
                   </Link>
                 </li>
               );
@@ -76,6 +77,7 @@ const Header = ({ isAuthenticated, logoutUserAction }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.users.isAuthenticated,
+  basketCounter: state.productsBasket.basketCounter,
 });
 
 const mapDispatchToProps = (dispatch) => {
