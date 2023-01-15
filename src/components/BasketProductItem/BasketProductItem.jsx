@@ -30,7 +30,7 @@ const LongText = ({ content, limit, className }) => {
   );
 };
 
-const BasketProductItem = ({ productBasketData, setDeleteProductsData }) => {
+const BasketProductItem = ({ productBasketData }) => {
   return (
     <>
       {productBasketData.map((data) => {

@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { fetchData } from '../../API/ProductService';
 import { connect } from 'react-redux';
 
-import { setAddProductsData, setDeleteProductsData } from '../../redux/actions/productsBasketAction';
+import { setAddBasketItem } from '../../redux/actions/productsBasketAction';
 
 import CommonButton from '../../components/UI/CommonButton';
 import BackButton from '../../components/UI/BackButton';
 
 import Star from '../../images/star.svg';
-import stockImg from '../../images/image-on-swiper-login-2(No).png'
+import stockImg from '../../images/image-on-swiper-login-2(No).png';
 
 import './style.scss';
+import FormLink from '../../components/UI/FormLink';
 
-const ProductPage = ({ setAddProductsData, setDeleteProductsData }) => {
+const ProductPage = ({ setAddBasketItem, isAuthenticated }) => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const ProductPage = ({ setAddProductsData, setDeleteProductsData }) => {
   //Redux basket
 
   const handleAddTobasket = () => {
-    setAddProductsData(productData);
+    setAddBasketItem(productData);
   };
 
   return (
@@ -64,21 +65,29 @@ const ProductPage = ({ setAddProductsData, setDeleteProductsData }) => {
               {productData?.description}
             </div>
             <div className="buttons">
-              <CommonButton className="product_btn">Buy Now</CommonButton>
-              <CommonButton onClick={handleAddTobasket} className="product_btn">
-                Add in basket
-              </CommonButton>
+              {isAuthenticated ? (
+                <CommonButton onClick={handleAddTobasket} className="product_btn">
+                  Add in basket
+                </CommonButton>
+              ) : (
+                <div>
+                  <CommonButton href="/auth/login" className="product_btn">
+                    Login
+                  </CommonButton>
+                </div>
+              )}
             </div>
+
             <div className="subtitle_item">
               <span>In Stock:</span>
               {productData?.rating.count}
             </div>
           </div>
         </div>
-        <BackButton
+        <BackButton href='/'
           text="Come Back"
           onClick={() => {
-            navigate('/');
+            navigate();
           }}
         ></BackButton>
       </div>
@@ -86,11 +95,14 @@ const ProductPage = ({ setAddProductsData, setDeleteProductsData }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.users.isAuthenticated,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    setAddProductsData: (payload) => dispatch(setAddProductsData(payload)),
-    setDeleteProductsData: (payload) => dispatch(setDeleteProductsData(payload)),
+    setAddBasketItem: (payload) => dispatch(setAddBasketItem(payload)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

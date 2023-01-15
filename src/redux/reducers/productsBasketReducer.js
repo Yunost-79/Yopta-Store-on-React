@@ -8,7 +8,7 @@ export const productsBasketReducer = (state = initialState, action) => {
     case 'ADD_PRODUCTS_BASKET_DATA':
       return { ...state, productBasketData: [...state.productBasketData, action.payload] };
 
-    case 'DELETE_PRODUCTS_BASKET_DATA':
+    case 'DELETE_PRODUCTS_BASKET_ITEM':
       const deleteData = state.productBasketData.filter((item) => item.id !== action.payload.id);
       return { ...state, productBasketData: deleteData };
 

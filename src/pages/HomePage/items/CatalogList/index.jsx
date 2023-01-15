@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import CommonButton from '../../../../components/UI/CommonButton';
 
 import stockImg from '../../../../images/image-on-swiper-login-2(No).png';
-import { setAddProductsData } from '../../../../redux/actions/productsBasketAction';
+import { setAddBasketItem } from '../../../../redux/actions/productsBasketAction';
 
 import './style.scss';
 
-const CatalogList = ({ products, setAddProductsData }) => {
+const CatalogList = ({ products, setAddBasketItem, isAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleAddToBasket = (elem) => {
-    setAddProductsData(elem);
+    setAddBasketItem(elem);
   };
 
   return (
@@ -28,9 +28,11 @@ const CatalogList = ({ products, setAddProductsData }) => {
             <CommonButton className="product_button" onClick={() => navigate(`/product/${elem.id}`)}>
               Open Details
             </CommonButton>
-            <CommonButton className="product_button" onClick={() => handleAddToBasket(elem)}>
-              Add in basket
-            </CommonButton>
+            {isAuthenticated && (
+              <CommonButton className="product_button" onClick={() => handleAddToBasket(elem)}>
+                Add in basket
+              </CommonButton>
+            )}
           </div>
         </div>
       ))}
@@ -38,10 +40,14 @@ const CatalogList = ({ products, setAddProductsData }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.users.isAuthenticated,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    setAddProductsData: (payload) => dispatch(setAddProductsData(payload)),
+    setAddBasketItem: (payload) => dispatch(setAddBasketItem(payload)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(CatalogList);
+export default connect(mapStateToProps, mapDispatchToProps)(CatalogList);

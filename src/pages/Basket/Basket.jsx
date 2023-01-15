@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setAddProductsData, setDeleteProductsData, setProductsBasketData, setDeleteProductsDataAll } from '../../redux/actions/productsBasketAction';
+import { setDeleteBasketDataItem, setDeleteBasketDataAll } from '../../redux/actions/productsBasketAction';
 import { Link } from 'react-router-dom';
 import BasketProductItem from '../../components/BasketProductItem/BasketProductItem';
 import CommonButton from '../../components/UI/CommonButton';
 
 import './style.scss';
 
-const Basket = ({ productBasketData, basketCounter, setAddProductsData, setProductsBasketData, setDeleteProductsData, setDeleteProductsDataAll }) => {
+const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataItem, setDeleteBasketDataAll }) => {
   const handleDeleteItem = () => {
-    setDeleteProductsDataAll();
+    setDeleteBasketDataAll();
     localStorage.removeItem('basket_data');
   };
 
@@ -38,7 +38,7 @@ const Basket = ({ productBasketData, basketCounter, setAddProductsData, setProdu
             {productBasketData.length === 0 ? (
               <div>Empty basket</div>
             ) : (
-              <BasketProductItem productBasketData={productBasketData} setDeleteProductsData={setDeleteProductsData} />
+              <BasketProductItem productBasketData={productBasketData} setDeleteBasketDataItem={setDeleteBasketDataItem} />
             )}
           </div>
         </div>
@@ -60,10 +60,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setProductsBasketData: (payload) => dispatch(setProductsBasketData(payload)),
-    setAddProductsData: (payload) => dispatch(setAddProductsData(payload)),
-    setDeleteProductsData: (payload) => dispatch(setDeleteProductsData(payload)),
-    setDeleteProductsDataAll: (payload) => dispatch(setDeleteProductsDataAll(payload)),
+    setDeleteBasketDataItem: (payload) => dispatch(setDeleteBasketDataItem(payload)),
+    setDeleteBasketDataAll: (payload) => dispatch(setDeleteBasketDataAll(payload)),
   };
 };
 
