@@ -33,13 +33,14 @@ const BasketProductItem = ({ productBasketData, setDeleteProductsData }) => {
   return (
     <>
       {productBasketData.map((data) => (
-        <div className="left_product_item">
+        <div key={data.id} className="left_product_item">
           <div className="product_left_block">
             <div className="product_checkbox_block">
               <Checkbox className="product_checkbox" defaultChecked size="small" />
             </div>
             <div className="product_left_image">
-              <img src={data.image} alt="product_img" />
+              {/* <img src={data.image} alt="product_img" /> */}
+              <img src={img} alt="product_img" />
             </div>
             <div className="product_left_description">
               <LongText className="description_item item_title" content={data.title} limit={50} />

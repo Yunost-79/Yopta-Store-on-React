@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import CommonButton from '../../../../components/UI/CommonButton';
 
+import stockImg from '../../../../images/image-on-swiper-login-2(No).png'
+
+
 import './style.scss';
 
 const CatalogList = ({ products }) => {
@@ -12,7 +15,8 @@ const CatalogList = ({ products }) => {
     <>
       {products.map((elem) => (
         <div key={elem.id} className="product_block">
-          <img className="product_image" src={elem.image} alt={elem.title} onClick={() => navigate(`/product/${elem.id}`)} />
+          {/* <img className="product_image" src={elem.image} alt={elem.title} onClick={() => navigate(`/product/${elem.id}`)} /> */}
+          <img className="product_image" src={stockImg} alt={elem.title} onClick={() => navigate(`/product/${elem.id}`)} />
           <div className="product_subcontent">
             <h3 className="product_title">{elem.title}</h3>
             <span className="product_price">{elem.price} &#x20AC;</span>

@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setAddProductsData, setDeleteProductsData } from '../../redux/actions/productsAction';
+import { setAddProductsData, setDeleteProductsData, setProductsData } from '../../redux/actions/productsAction';
 import { Link } from 'react-router-dom';
 import BasketProductItem from '../../components/BasketProductItem/BasketProductItem';
 import CommonButton from '../../components/UI/CommonButton';
 
 import './style.scss';
+import { useEffect } from 'react';
 
-const Basket = ({ productBasketData }) => {
+const Basket = ({ productBasketData, setAddProductsData, setProductsData }) => {
   console.log('productBasketData', productBasketData);
 
+  useEffect(() => {
+    if (productBasketData.length) {
+      localStorage.setItem('data_basket', JSON.stringify(productBasketData));
+    }
+    const getJSONBasket = JSON.parse(localStorage.getItem('data_basket'));
+    setProductsData(getJSONBasket);
+  }, [setAddProductsData]);
 
   return (
     <div className="basket_container">
@@ -51,6 +59,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setProductsData: (payload) => dispatch(setProductsData(payload)),
     setAddProductsData: (payload) => dispatch(setAddProductsData(payload)),
     setDeleteProductsData: (payload) => dispatch(setDeleteProductsData(payload)),
   };

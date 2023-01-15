@@ -9,6 +9,7 @@ import CommonButton from '../../components/UI/CommonButton';
 import BackButton from '../../components/UI/BackButton';
 
 import Star from '../../images/star.svg';
+import stockImg from '../../images/image-on-swiper-login-2(No).png'
 
 import './style.scss';
 
@@ -47,7 +48,8 @@ const ProductPage = ({ setAddProductsData, setDeleteProductsData }) => {
         </div>
         <div className="product_content">
           <div className="image">
-            <img src={productData?.image} alt={productData?.title} />
+            {/* <img src={productData?.image} alt={productData?.title} /> */}
+            <img src={stockImg} alt={productData?.title} />
           </div>
           <div className="subtitle">
             <div className="subtitle_item">
