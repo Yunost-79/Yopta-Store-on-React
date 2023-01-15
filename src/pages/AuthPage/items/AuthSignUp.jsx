@@ -24,12 +24,10 @@ let AuthSignUp = ({ reset, userSignUpData, setUserSignUpData, formValueSignUp })
 
   const handleSubmitSignUp = (event) => {
     event.preventDefault();
-    console.log(formValueSignUp);
     setUserSignUpData(formValueSignUp);
     alert(userSignUpData)
   };
 
-  console.log('userSignUpData:', userSignUpData);
   
 
   const handleShowPasswords = () => {

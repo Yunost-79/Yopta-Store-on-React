@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchData } from '../../API/ProductService';
 import { connect } from 'react-redux';
 
-import { setAddProductsData, setDeleteProductsData } from '../../redux/actions/productsAction';
+import { setAddProductsData, setDeleteProductsData } from '../../redux/actions/productsBasketAction';
 
 import CommonButton from '../../components/UI/CommonButton';
 import BackButton from '../../components/UI/BackButton';
@@ -48,8 +48,7 @@ const ProductPage = ({ setAddProductsData, setDeleteProductsData }) => {
         </div>
         <div className="product_content">
           <div className="image">
-            {/* <img src={productData?.image} alt={productData?.title} /> */}
-            <img src={stockImg} alt={productData?.title} />
+            <img src={productData?.image} alt={productData?.title} />
           </div>
           <div className="subtitle">
             <div className="subtitle_item">

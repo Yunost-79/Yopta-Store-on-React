@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setAddProductsData, setDeleteProductsData, setProductsData } from '../../redux/actions/productsAction';
+import { setAddProductsData, setDeleteProductsData, setProductsBasketData, setDeleteProductsDataAll } from '../../redux/actions/productsBasketAction';
 import { Link } from 'react-router-dom';
 import BasketProductItem from '../../components/BasketProductItem/BasketProductItem';
 import CommonButton from '../../components/UI/CommonButton';
@@ -8,16 +8,11 @@ import CommonButton from '../../components/UI/CommonButton';
 import './style.scss';
 import { useEffect } from 'react';
 
-const Basket = ({ productBasketData, setAddProductsData, setProductsData }) => {
-  console.log('productBasketData', productBasketData);
-
-  useEffect(() => {
-    if (productBasketData.length) {
-      localStorage.setItem('data_basket', JSON.stringify(productBasketData));
-    }
-    const getJSONBasket = JSON.parse(localStorage.getItem('data_basket'));
-    setProductsData(getJSONBasket);
-  }, [setAddProductsData]);
+const Basket = ({ productBasketData, setAddProductsData, setProductsBasketData, setDeleteProductsData, setDeleteProductsDataAll }) => {
+  const handleDeleteItem = () => {
+    setDeleteProductsDataAll();
+    localStorage.removeItem('basket_data');
+  };
 
   return (
     <div className="basket_container">
@@ -27,6 +22,9 @@ const Basket = ({ productBasketData, setAddProductsData, setProductsData }) => {
           <div className="content_left_tablehead">
             <div className="left_tablehead_block tablehead_links">
               <Link className="left_teblehead_item tablehead_link">Choose all</Link>
+              <Link className="left_teblehead_item tablehead_link" onClick={handleDeleteItem}>
+                Clear all
+              </Link>
             </div>
             <div className="left_tablehead_block tablehead_spans">
               <span className="left_teblehead_item tablehead_span tablehead_description">Description</span>
@@ -54,14 +52,15 @@ const Basket = ({ productBasketData, setAddProductsData, setProductsData }) => {
 };
 
 const mapStateToProps = (state) => ({
-  productBasketData: state.products.productBasketData,
+  productBasketData: state.productsBasket.productBasketData,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setProductsData: (payload) => dispatch(setProductsData(payload)),
+    setProductsBasketData: (payload) => dispatch(setProductsBasketData(payload)),
     setAddProductsData: (payload) => dispatch(setAddProductsData(payload)),
     setDeleteProductsData: (payload) => dispatch(setDeleteProductsData(payload)),
+    setDeleteProductsDataAll: (payload) => dispatch(setDeleteProductsDataAll(payload)),
   };
 };
 

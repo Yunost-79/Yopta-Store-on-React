@@ -26,8 +26,8 @@
     & .product_left_image {
       & img {
         width: 150px;
-        object-fit: cover;
-        height: auto;
+        object-fit: contain;
+        height: 150px;
       }
     }
 

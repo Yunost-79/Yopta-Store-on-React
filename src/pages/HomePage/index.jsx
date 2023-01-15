@@ -4,9 +4,10 @@ import './style.scss';
 import PreviewMain from './items/PreviewMain';
 import ProductMain from './items/ProductMain';
 import { fetchData } from '../../API/ProductService';
+import { connect } from 'react-redux';
+import { setProductList } from '../../redux/actions/productDataAction';
 
-const HomePage = () => {
-  const [productsList, setProductsList] = useState([]);
+const HomePage = ({ productList, setProductList }) => {
   const [isProductLoading, setIsProductLoading] = useState(false);
 
   useEffect(() => {
@@ -14,18 +15,33 @@ const HomePage = () => {
   }, []);
 
   const handleGetData = async () => {
-    setIsProductLoading(true);
-    const data = await fetchData('/products');
-    const products = data.data;
-    setProductsList(products);
-    setIsProductLoading(false);
+    try {
+      setIsProductLoading(true);
+      const data = await fetchData('/products');
+      const products = data.data;
+      setProductList(products);
+      setIsProductLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <div className="main">
       <PreviewMain />
-      <ProductMain productsList={productsList} isProductLoading={isProductLoading} />
+      <ProductMain productsList={productList} isProductLoading={isProductLoading} />
     </div>
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state) => ({
+  productList: state.productsData.productList,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setProductList: (payload) => dispatch(setProductList(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

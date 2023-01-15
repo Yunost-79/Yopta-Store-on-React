@@ -19,7 +19,6 @@ let AuthTest = ({ reset, formValue }) => {
     event.preventDefault();
   };
 
-  console.log(formValue);
 
   return (
     <form className="form_auth" onSubmit={handleSubmitTest}>

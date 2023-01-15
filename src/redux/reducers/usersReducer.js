@@ -10,7 +10,6 @@ export const usersReducer = (state = initialState, action) => {
 
     case 'USER_DATA_REQUEST':
       if (action.payload !== 401) {
-        // console.log('action.payload', action.payload);
         return { ...state, isAuthenticated: true };
       }
       return { isAuthenticated: false };

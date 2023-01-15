@@ -40,7 +40,6 @@ let AuthLogin = ({ reset, userData, setUserData, formValueLogin, loginUserAction
       const userData = getData.data;
 
       const geoData = await getRandomGeolocation();
-      // console.log('AuthgeoData', geoData);
 
       localStorage.setItem(
         'user_data',
@@ -55,7 +54,7 @@ let AuthLogin = ({ reset, userData, setUserData, formValueLogin, loginUserAction
       loginUserAction(userData);
       navigate('/');
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       loginUserAction(error.response.status || error);
     }
   };
