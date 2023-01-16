@@ -13,3 +13,6 @@ export const setDeleteBasketDataAll = (payload) => {
 export const setBasketCounter = (payload) => {
   return { type: 'COUNT_PRODUCTS_BASKET_DATA', payload: payload };
 };
+export const setBasketItemCounter = (payload) => {
+  return { type: 'BASKET_ITEM_COUNTER', payload: payload };
+};

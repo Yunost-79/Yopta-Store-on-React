@@ -5,15 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import CommonButton from '../../../../components/UI/CommonButton';
 
 import stockImg from '../../../../images/image-on-swiper-login-2(No).png';
-import { setAddBasketItem } from '../../../../redux/actions/productsBasketAction';
+import { setAddBasketItem, setBasketItemCounter } from '../../../../redux/actions/productsBasketAction';
 
 import './style.scss';
 
-const CatalogList = ({ products, setAddBasketItem, isAuthenticated }) => {
+const CatalogList = ({ products, setAddBasketItem, isAuthenticated, setBasketItemCounter }) => {
   const navigate = useNavigate();
 
   const handleAddToBasket = (elem) => {
     setAddBasketItem(elem);
+    setBasketItemCounter(elem);
   };
 
   return (
@@ -47,6 +48,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     setAddBasketItem: (payload) => dispatch(setAddBasketItem(payload)),
+    setBasketItemCounter: (payload) => dispatch(setBasketItemCounter(payload)),
   };
 };
 

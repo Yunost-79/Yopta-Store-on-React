@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setDeleteBasketDataItem, setDeleteBasketDataAll } from '../../redux/actions/productsBasketAction';
+import { setDeleteBasketDataAll } from '../../redux/actions/productsBasketAction';
 import { Link } from 'react-router-dom';
 import BasketProductItem from '../../components/BasketProductItem/BasketProductItem';
 import CommonButton from '../../components/UI/CommonButton';
 
 import './style.scss';
 
-const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataItem, setDeleteBasketDataAll }) => {
-  const handleDeleteItem = () => {
+const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataAll }) => {
+  const handleDeleteAll = () => {
     setDeleteBasketDataAll();
     localStorage.removeItem('basket_data');
   };
-
-  console.log(basketCounter);
 
   return (
     <div className="basket_container">
@@ -23,7 +21,7 @@ const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataItem, set
           <div className="content_left_tablehead">
             <div className="left_tablehead_block tablehead_links">
               <Link className="left_teblehead_item tablehead_link">Choose all</Link>
-              <Link className="left_teblehead_item tablehead_link" onClick={handleDeleteItem}>
+              <Link className="left_teblehead_item tablehead_link" onClick={handleDeleteAll}>
                 Clear all
               </Link>
             </div>
@@ -35,11 +33,7 @@ const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataItem, set
             </div>
           </div>
           <div className="content_left_products">
-            {productBasketData.length === 0 ? (
-              <div>Empty basket</div>
-            ) : (
-              <BasketProductItem productBasketData={productBasketData} setDeleteBasketDataItem={setDeleteBasketDataItem} />
-            )}
+            {productBasketData.length === 0 ? <div>Empty basket</div> : <BasketProductItem productBasketData={productBasketData} />}
           </div>
         </div>
         <div className="basket_content_block basket_content_right">
@@ -60,7 +54,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setDeleteBasketDataItem: (payload) => dispatch(setDeleteBasketDataItem(payload)),
     setDeleteBasketDataAll: (payload) => dispatch(setDeleteBasketDataAll(payload)),
   };
 };

@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { fetchData } from '../../API/ProductService';
 import { connect } from 'react-redux';
 
-import { setAddBasketItem } from '../../redux/actions/productsBasketAction';
+import { setAddBasketItem, setBasketItemCounter } from '../../redux/actions/productsBasketAction';
 
 import CommonButton from '../../components/UI/CommonButton';
 import BackButton from '../../components/UI/BackButton';
@@ -14,9 +14,9 @@ import stockImg from '../../images/image-on-swiper-login-2(No).png';
 import './style.scss';
 import FormLink from '../../components/UI/FormLink';
 
-const ProductPage = ({ setAddBasketItem, isAuthenticated }) => {
+const ProductPage = ({ setAddBasketItem, isAuthenticated, setBasketItemCounter }) => {
   const { id } = useParams();
-  const [productData, setProductData] = useState(null);
+  const [data, setData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,43 +26,44 @@ const ProductPage = ({ setAddBasketItem, isAuthenticated }) => {
   const handleGetData = async () => {
     if (id) {
       const result = await fetchData(`/products/${id}`);
-      setProductData(result.data);
+      setData(result.data);
     }
   };
 
   //Redux basket
 
   const handleAddTobasket = () => {
-    setAddBasketItem(productData);
+    setAddBasketItem(data);
+    setBasketItemCounter(data);
   };
 
   return (
     <div className="product_page">
       <div className="wrapper">
-        <h3 className="title">{productData?.title}</h3>
+        <h3 className="title">{data?.title}</h3>
         <div className="rate_block">
           <img className="rate_image" src={Star} alt="star" />
           <div className="rate_title">
             <span>Rate:</span>
-            {productData?.rating.rate}
+            {data?.rating.rate}
           </div>
         </div>
         <div className="product_content">
           <div className="image">
-            <img src={productData?.image} alt={productData?.title} />
+            <img src={data?.image} alt={data?.title} />
           </div>
           <div className="subtitle">
             <div className="subtitle_item">
               <span>Category:</span>
-              {productData?.category}
+              {data?.category}
             </div>
             <div className="subtitle_item">
               <span>Price:</span>
-              {productData?.price} &#x20AC;
+              {data?.price} &#x20AC;
             </div>
             <div className="subtitle_item">
               <span>Description:</span>
-              {productData?.description}
+              {data?.description}
             </div>
             <div className="buttons">
               {isAuthenticated ? (
@@ -80,11 +81,12 @@ const ProductPage = ({ setAddBasketItem, isAuthenticated }) => {
 
             <div className="subtitle_item">
               <span>In Stock:</span>
-              {productData?.rating.count}
+              {data?.rating.count}
             </div>
           </div>
         </div>
-        <BackButton href='/'
+        <BackButton
+          href="/"
           text="Come Back"
           onClick={() => {
             navigate();
@@ -102,6 +104,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     setAddBasketItem: (payload) => dispatch(setAddBasketItem(payload)),
+    setBasketItemCounter: (payload) => dispatch(setBasketItemCounter(payload)),
   };
 };
 
