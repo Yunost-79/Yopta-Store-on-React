@@ -16,3 +16,12 @@ export const setBasketCounter = (payload) => {
 export const setBasketItemCounter = (payload) => {
   return { type: 'BASKET_ITEM_COUNTER', payload: payload };
 };
+export const editBasketItem = (payload) => {
+  return { type: 'UPDATE_BASKET_ITEM', payload: payload };
+};
+export const setBasketIncrementQuantity = (payload) => {
+  return { type: 'INCREMENT_QUANTITY_BASKET_ITEM', payload: payload };
+};
+export const setBasketDecrementQuantity = (payload) => {
+  return { type: 'DECREMENT_QUANTITY_BASKET_ITEM', payload: payload };
+};

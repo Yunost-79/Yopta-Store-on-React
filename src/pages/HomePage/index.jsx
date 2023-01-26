@@ -13,6 +13,7 @@ const HomePage = ({ productList, setProductList }) => {
   useEffect(() => {
     handleGetData();
   }, []);
+  
 
   const handleGetData = async () => {
     try {

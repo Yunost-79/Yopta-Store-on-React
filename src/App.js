@@ -45,7 +45,6 @@ function App({ userIsAuth, productBasketData, setProductsBasketData,  setBasketC
         <Route path="/about" element={<About />} />
         <Route path="/basket" element={<Basket />} />
         <Route path="/profile" element={<MyProfile />} />
-
         <Route path="/product/:id" element={<ProductPage />} />
 
         <Route path="/auth" element={<AuthPage />}>

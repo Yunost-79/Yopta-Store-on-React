@@ -33,7 +33,13 @@ const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataAll }) =>
             </div>
           </div>
           <div className="content_left_products">
-            {productBasketData.length === 0 ? <div>Empty basket</div> : <BasketProductItem productBasketData={productBasketData} />}
+            {productBasketData.length === 0 ? (
+              <div>Empty basket</div>
+            ) : (
+              productBasketData.map((data) => {
+                return <BasketProductItem key={data.id} data={data} />;
+              })
+            )}
           </div>
         </div>
         <div className="basket_content_block basket_content_right">
