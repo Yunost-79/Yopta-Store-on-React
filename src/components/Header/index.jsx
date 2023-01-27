@@ -61,7 +61,7 @@ const Header = ({ isAuthenticated, logoutUserAction, basketCounter }) => {
                 <li key={label}>
                   <Link to={to} className={`link ${label} ${to === location.pathname ? 'active' : ''}`}>
                     {label}
-                    {basketCounter !== 0 && to === '/basket' ? <CountCircle basketCounter={basketCounter} /> : null}
+                    {basketCounter !== 0 && to === '/basket' ? <CountCircle basketCounter={basketCounter} /> : ''}
                   </Link>
                 </li>
               );

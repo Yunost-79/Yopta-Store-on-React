@@ -46,41 +46,38 @@
     & .header_links {
       & ul {
         display: flex;
-        
+
         & li {
           margin-left: 30px;
-          
+
           &:first-of-type {
             margin-left: 0;
           }
-          
+
           & .link {
+            position: relative;
             text-decoration: none;
             color: #fff;
             transition: 0.2s all;
-            
+
             &:hover {
               color: $yellow;
-              
+
               & .counter_circle {
                 color: #fff;
-                
+
                 &::after {
                   background-color: $yellow;
                 }
               }
             }
-            
+
             &.active {
               color: $yellow;
-              
+
               & .counter_circle {
                 color: #fff;
               }
-            }
-
-            & .Basket {
-              position: absolute;
             }
           }
         }
