@@ -7,7 +7,7 @@ import CommonButton from '../../components/UI/CommonButton';
 
 import './style.scss';
 
-const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataAll }) => {
+const Basket = ({ productBasketData, basketCounter, basketPrice, setDeleteBasketDataAll }) => {
   const handleDeleteAll = () => {
     setDeleteBasketDataAll();
     localStorage.removeItem('basket_data');
@@ -45,7 +45,7 @@ const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataAll }) =>
         <div className="basket_content_block basket_content_right">
           <span className="right_product_item right_product_title">Subtotal</span>
           <span className="right_product_item right_product_amount">{`Total: ${basketCounter}`}</span>
-          <span className="right_product_item right_product_price">Total price: 228$</span>
+          <span className="right_product_item right_product_price">{`Total price: ${basketPrice === 0 ? basketPrice.toFixed() : basketPrice.toFixed(2) } €`}</span>
           <CommonButton className="right_product_item">Checkout</CommonButton>
         </div>
       </div>
@@ -56,6 +56,7 @@ const Basket = ({ productBasketData, basketCounter, setDeleteBasketDataAll }) =>
 const mapStateToProps = (state) => ({
   productBasketData: state.productsBasket.productBasketData,
   basketCounter: state.productsBasket.basketCounter,
+  basketPrice: state.productsBasket.basketPrice,
 });
 
 const mapDispatchToProps = (dispatch) => {

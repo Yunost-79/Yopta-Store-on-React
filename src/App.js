@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userIsAuth } from './redux/actions/userActions';
-import { setProductsBasketData, setBasketCounter } from './redux/actions/productsBasketAction';
+import { setProductsBasketData, setBasketCounter, setBasketPrice } from './redux/actions/productsBasketAction';
 
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
@@ -19,7 +19,7 @@ import Footer from './components/Footer';
 import './App.scss';
 import './variables/variablesStyle.scss';
 
-function App({ userIsAuth, productBasketData, setProductsBasketData,  setBasketCounter }) {
+function App({ userIsAuth, productBasketData, setProductsBasketData, setBasketCounter, setBasketPrice }) {
   useEffect(() => {
     const userLocalData = JSON.parse(localStorage.getItem('user_data'));
 
@@ -33,9 +33,9 @@ function App({ userIsAuth, productBasketData, setProductsBasketData,  setBasketC
 
   useEffect(() => {
     localStorage.setItem('basket_data', JSON.stringify(productBasketData));
-    setBasketCounter(productBasketData.length);
+    setBasketCounter(productBasketData);
+    setBasketPrice(productBasketData);
   }, [productBasketData]);
-
 
   return (
     <div className="wrapper">
@@ -68,6 +68,7 @@ const mapDispatchToProps = (dispatch) => {
     userIsAuth: (payload) => dispatch(userIsAuth(payload)),
     setProductsBasketData: (payload) => dispatch(setProductsBasketData(payload)),
     setBasketCounter: (payload) => dispatch(setBasketCounter(payload)),
+    setBasketPrice: (payload) => dispatch(setBasketPrice(payload)),
   };
 };
 

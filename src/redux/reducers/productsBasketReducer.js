@@ -1,4 +1,6 @@
-const initialState = { productBasketData: [], basketCounter: 0, defaulteQuantity: 1, quantity: null };
+const initialState = { productBasketData: [], basketCounter: 0, basketPrice: 0, quantity: 0 };
+
+const sumOfArray = (arr) => arr.reduce((acc, num) => acc + num, 0);
 
 export const productsBasketReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -6,7 +8,24 @@ export const productsBasketReducer = (state = initialState, action) => {
       return { ...state, productBasketData: action.payload };
 
     case 'ADD_PRODUCTS_BASKET_DATA':
-      return { ...state, productBasketData: [...state.productBasketData, { ...action.payload, quantity: 1 }] };
+      const productInBasket = state.productBasketData.find((item) => item.id === action.payload.id);
+
+      if (!productInBasket) {
+        return {
+          ...state,
+          productBasketData: [...state.productBasketData, { ...action.payload, quantity: 1 }].sort((a, b) => b.id - a.id),
+        };
+      } else {
+        return {
+          ...state,
+          productBasketData: state.productBasketData.map((item) => {
+            if (item.id === action.payload.id) {
+              return { ...item, quantity: item.quantity + 1 };
+            }
+            return item;
+          }),
+        };
+      }
 
     case 'DELETE_PRODUCTS_BASKET_ITEM':
       const deleteData = state.productBasketData.filter((item) => item.id !== action.payload);
@@ -16,32 +35,22 @@ export const productsBasketReducer = (state = initialState, action) => {
       return { ...state, productBasketData: [] };
 
     case 'COUNT_PRODUCTS_BASKET_DATA':
-      return { ...state, basketCounter: action.payload };
+      const itemCount = state.productBasketData.map((item) => item.quantity);
+      const resultAmount = sumOfArray(itemCount);
+      return { ...state, basketCounter: resultAmount };
+
+    case 'PRICE_PRODUCT_BASKET_DATA':
+      const itemPrice = state.productBasketData.map((item) => {
+        return item.price * item.quantity;
+      });
+      const roundedPrice = sumOfArray(itemPrice);
+      return { ...state, basketPrice: roundedPrice };
 
     case 'UPDATE_BASKET_ITEM':
       const list = state.productBasketData.filter((item) => item.id !== action.payload.id);
+      const result = [...list, action.payload].sort((a, b) => b.id - a.id);
 
-      // const { id, newQuantity } = action.payload;
-      // const itemQuantity = state.productBasketData;
-      // if (itemQuantity.id === id) {
-      //   return {
-      //     ...itemQuantity,
-      //     quantity: newQuantity,
-      //   };
-      // }
-
-      return { ...state, productBasketData: [...list, action.payload] };
-
-    case 'INCREMENT_QUANTITY_BASKET_ITEM':
-      return { ...state, quantity: state.quantity + 1 };
-
-    case 'DECREMENT_QUANTITY_BASKET_ITEM':
-      return { ...state, quantity: state.quantity - 1 };
-
-    // case 'TOGGLE_PRODUCT_DATA':
-    //   const toggleItem = state.productBasketData.finFd((item) => item.id === action.payload.id);
-
-    //   return { ...state, productsReducer: toggleItem };
+      return { ...state, productBasketData: result };
 
     default:
       return state;

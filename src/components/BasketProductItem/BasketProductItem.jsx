@@ -1,13 +1,7 @@
 import { Button, ButtonGroup, Checkbox, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  setBasketDecrementQuantity,
-  setBasketIncrementQuantity,
-  setBasketItemCounter,
-  editBasketItem,
-  setDeleteBasketDataItem,
-} from '../../redux/actions/productsBasketAction';
+import { editBasketItem, setDeleteBasketDataItem } from '../../redux/actions/productsBasketAction';
 
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -38,31 +32,16 @@ const LongText = ({ content, limit, className }) => {
   );
 };
 
-const BasketProductItem = ({
-  data,
-  setDeleteBasketDataItem,
-  setBasketItemCounter,
-  setBasketDecrementQuantity,
-  setBasketIncrementQuantity,
-  editBasketItem,
-  quantity,
-}) => {
-  const handeleDeleteItem = (data) => {
+const BasketProductItem = ({ data, setDeleteBasketDataItem, editBasketItem }) => {
+  const handeleDeleteItem = () => {
     setDeleteBasketDataItem(data.id);
   };
 
-  const handleChangeInput = (e) => {
-    const value = e.target.value;
-    editBasketItem(value);
-    // console.log(quantity);
-  };
-
   const handleUpdateQuantity = (quantity) => {
-    console.log({ ...data, quantity });
-    editBasketItem({ ...data, quantity });
+    if (quantity > 0) {
+      editBasketItem({ ...data, quantity });
+    }
   };
-
-  // console.log('quantity', quantity);
 
   return (
     <div key={data.id} className="left_product_item">
@@ -83,9 +62,15 @@ const BasketProductItem = ({
       </div>
       <div className="product_left_amount">
         <ButtonGroup variant="contained" aria-label="outlined primary button group">
-          <Button onClick={() => handleUpdateQuantity(data.quantity--)}>-</Button>
-          <TextField onChange={handleChangeInput} value={data.quantity} type="number" id="outlined-basic" variant="outlined" />
-          <Button onClick={() => handleUpdateQuantity(data.quantity++)}>+</Button>
+          <Button onClick={() => handleUpdateQuantity(data.quantity - 1)}>-</Button>
+          <TextField
+            onChange={(e) => handleUpdateQuantity(e.target.value)}
+            value={data.quantity}
+            type="text"
+            id="outlined-basic"
+            variant="outlined"
+          />
+          <Button onClick={() => handleUpdateQuantity(data.quantity + 1)}>+</Button>
         </ButtonGroup>
       </div>
       <div className="product_left_price">{`${data.price} €`}</div>
@@ -102,15 +87,13 @@ const BasketProductItem = ({
 
 const mapStateToProps = (state) => ({
   quantity: state.productsBasket.quantity,
+  
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setDeleteBasketDataItem: (payload) => dispatch(setDeleteBasketDataItem(payload)),
-    setBasketItemCounter: (payload) => dispatch(setBasketItemCounter(payload)),
     editBasketItem: (payload) => dispatch(editBasketItem(payload)),
-    setBasketIncrementQuantity: (payload) => dispatch(setBasketIncrementQuantity(payload)),
-    setBasketDecrementQuantity: (payload) => dispatch(setBasketDecrementQuantity(payload)),
   };
 };
 

@@ -15,4 +15,11 @@ const reducer = combineReducers({
   form: formReducer.plugin({ loginTestReducer }),
 });
 
-export const store = configureStore({ reducer /* middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger) */ });
+export const store = configureStore({
+  reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }) /*.concat(logger)*/,
+});
